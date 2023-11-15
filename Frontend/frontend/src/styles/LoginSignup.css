@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 1%;
+  width: 35%;
+  background: #fff;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 10%;
+}
+
+.text {
+  color: #121619;
+  font-size: 250%;
+  font-weight: 700;
+}
+
+.underline {
+  width: 15%;
+  height: 6px;
+  background: #121619;
+  border-radius: 9px;
+}
+
+.inputs {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 85%;
+  height: 60px;
+  background: #eaeaea;
+  border-radius: 6px;
+}
+
+.input img {
+  margin: 0% 5%;
+}
+
+.input input {
+  height: 50px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #797979;
+  font-size: 100%;
+}
+
+.forgot-password {
+  padding-left: 10%;
+  margin-top: 5%;
+  color: #797979;
+  font-size: 100%;
+}
+
+.forgot-password span {
+  color: #121619;
+  cursor: pointer;
+}
+
+.submit-container {
+  display: flex;
+  gap: 10%;
+  margin: 20% auto;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 59px;
+  color: #fff;
+  background: #121619;
+  border-radius: 50px;
+  font-size: 130%;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gray {
+  background: #eaeaea;
+  color: #676767;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 30%;
+    width: 70%;
+    background: #fff;
+    padding-bottom: 1%;
+  }
+
+  .submit-container {
+    display: flex;
+    gap: 10%;
+    margin: 20% 20%;
+  }
+
+  .submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150%;
+    height: 40px;
+    color: #fff;
+    background: #121619;
+    border-radius: 50px;
+    font-size: 100%;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .gray {
+    background: #eaeaea;
+    color: #676767;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginSignup.css";
+import "../styles/LoginSignup.css";
 import userIcon from "../Assets/person.png";
 import emailIcon from "../Assets/email.png";
 import passwordIcon from "../Assets/password.png";
@@ -31,7 +31,7 @@ const LoginSignup = () => {
           <input type="password" placeholder="Password" />
         </div>
       </div>
-      {action == "Sign Up" ? (
+      {action === "Sign Up" ? (
         <div></div>
       ) : (
         <div className="forgot-password">
