@@ -26,9 +26,9 @@ function Navbar() {
             {" "}
             Products{" "}
           </Link>
-          <Link to="/contact" onClick={toggleNavbar}>
+          <Link to="/About" onClick={toggleNavbar}>
             {" "}
-            Contact{" "}
+            About&nbsp;us{" "}
           </Link>
           <Link to="/LogIn" onClick={toggleNavbar}>
             {" "}
@@ -45,9 +45,9 @@ function Navbar() {
           {" "}
           Products{" "}
         </Link>
-        <Link to="/contact" className="nav-link">
+        <Link to="/About" className="nav-link">
           {" "}
-          Contact{" "}
+          About us{" "}
         </Link>
         <Link to="/LogIn" className="nav-link">
           {" "}

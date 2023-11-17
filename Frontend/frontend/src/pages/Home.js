@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BackgroundImage from "../Assets/background.jpg";
 import "../styles/Home.css";
 
 function Home() {
@@ -12,10 +11,10 @@ function Home() {
       }}
     >
       <div className="headerContainer">
-        <h1>Discounts</h1>
-        <p>Come get your discounts</p>
+        <h1>Stylish Savings</h1>
+        <p>Exclusive Discounts Await!</p>
         <Link to="/products">
-          <button>Discounts!</button>
+          <button>Explore Deals!</button>
         </Link>
       </div>
     </div>

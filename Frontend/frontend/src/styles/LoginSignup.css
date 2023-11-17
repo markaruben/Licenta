@@ -72,10 +72,24 @@
   cursor: pointer;
 }
 
+.input span {
+  cursor: pointer;
+}
+
 .submit-container {
   display: flex;
   gap: 10%;
   margin: 20% auto;
+}
+
+.error {
+  color: #ff5252; /* Error message color */
+  font-size: 90%; /* Adjust font size as needed */
+  margin-top: 5px; /* Add spacing from the input field */
+  width: 85%; /* Limit the width to match the input container */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .submit {

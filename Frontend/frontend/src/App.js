@@ -4,7 +4,7 @@ import Navbar from "./Components/Navbar";
 import LoginSignup from "./pages/LoginSignup";
 import Footer from "./Components/Footer";
 import Products from "./pages/Products";
-import Contact from "./pages/Contact";
+import About from "./pages/About";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/LogIn" element={<LoginSignup />} />
           <Route path="/Products" element={<Products />} />
-          <Route path="/Contact" element={<Contact />} />
+          <Route path="/About" element={<About />} />
         </Routes>
         <Footer />
       </Router>
