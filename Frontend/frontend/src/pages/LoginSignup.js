@@ -170,13 +170,6 @@ const LoginSignup = () => {
           <p className="error">{passwordError}</p>
         )}
       </div>
-      {action === "Sign Up" ? (
-        <div></div>
-      ) : (
-        <div className="forgot-password">
-          Forgot Passowrd? <span>Click Here!</span>
-        </div>
-      )}
       <div className="submit-container">
         <div
           className={action === "Log In" ? "submit gray" : "submit"}

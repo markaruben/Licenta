@@ -74,6 +74,7 @@
 
 .input span {
   cursor: pointer;
+  padding-right: 10px;
 }
 
 .submit-container {

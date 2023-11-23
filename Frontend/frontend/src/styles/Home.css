@@ -56,6 +56,7 @@
   .home {
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
   .headerContainer {
@@ -80,6 +81,7 @@
   .headerContainer p {
     font-size: 30px;
     color: white;
+    align-items: center;
   }
 
   .headerContainer button {
