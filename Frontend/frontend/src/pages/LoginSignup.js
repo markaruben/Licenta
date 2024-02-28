@@ -14,6 +14,7 @@ const LoginSignup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [name, setName] = useState("");
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -23,19 +24,60 @@ const LoginSignup = () => {
     setPassword(e.target.value);
   };
 
-  const submitAction = () => {
-    if (action === "Log In") {
-      setAction("Sign Up");
-    } else {
-      setAction("Log In");
-    }
-
+  const toggleForm = () => {
+    setAction(action === "Log In" ? "Sign Up" : "Log In");
+    setName("");
     setPassword("");
     setPasswordError("");
     setShowIcon(false);
     setShowPassword(false);
     setEmail("");
     setEmailError("");
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: email, password: password }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Login Success:", data);
+        alert("Welcome" + name);
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      });
+      if (response.status === 201 || response.status === 200) {
+        const data = await response.json();
+        console.log("Registration Success:", data);
+        setAction("Log In");
+      } else {
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+    }
   };
 
   const validatePassword = () => {
@@ -74,7 +116,12 @@ const LoginSignup = () => {
         ) : (
           <div className="input">
             <img src={userIcon} alt="" />
-            <input type="text" placeholder="Name" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
         )}
         {action === "Log In" ? (
@@ -172,21 +219,24 @@ const LoginSignup = () => {
       </div>
       <div className="submit-container">
         <div
-          className={action === "Log In" ? "submit gray" : "submit"}
+          className="submit"
           onClick={() => {
-            submitAction();
+            action === "Log In" ? handleLogin() : handleRegister();
           }}
         >
-          Sign Up
+          {action}
         </div>
-        <div
-          className={action === "Sign Up" ? "submit gray" : "submit"}
-          onClick={() => {
-            submitAction();
-          }}
-        >
-          Log In
-        </div>
+      </div>
+      <div className="toggle-action">
+        {action === "Log In" ? (
+          <p>
+            Don't have an account? <span onClick={toggleForm}>Sign Up</span>
+          </p>
+        ) : (
+          <p>
+            Already have an account? <span onClick={toggleForm}>Sign In</span>
+          </p>
+        )}
       </div>
     </div>
   );

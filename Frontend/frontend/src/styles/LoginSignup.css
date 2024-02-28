@@ -80,7 +80,7 @@
 .submit-container {
   display: flex;
   gap: 10%;
-  margin: 20% auto;
+  margin: 5% auto;
 }
 
 .error {
@@ -146,4 +146,23 @@
     background: #eaeaea;
     color: #676767;
   }
+}
+
+.toggle-action {
+  display: flex;
+  justify-content: center;
+  font-size: 100%;
+  color: #797979;
+  margin-bottom: 10%;
+}
+
+.toggle-action p {
+  margin: 0;
+}
+
+.toggle-action span {
+  color: #121619;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 5px;
 }
