@@ -20,10 +20,13 @@ public class ApplicationUser implements UserDetails {
     @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
+    private String email;
+
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name="user_role_junction",
+            name = "user_role_junction",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
@@ -34,11 +37,20 @@ public class ApplicationUser implements UserDetails {
         this.authorities = new HashSet<Role>();
     }
 
-    public ApplicationUser(Integer userId, String username, String password, Set<Role> authorities) {
+    public ApplicationUser(Integer userId, String username, String email, String password, Set<Role> authorities) {
         this.userId = userId;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.authorities = authorities;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getUserId() {

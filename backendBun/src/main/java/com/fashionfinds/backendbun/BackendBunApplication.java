@@ -30,7 +30,7 @@ public class BackendBunApplication {
             Set<Role> roles = new HashSet<>();
             roles.add(adminRole);
 
-            ApplicationUser admin = new ApplicationUser(1, "admin", passwordEncoder.encode("password"), roles);
+            ApplicationUser admin = new ApplicationUser(1, "admin", "admin@yahoo.com", "{bcrypt}" + passwordEncoder.encode("password"), roles);
 
             userRepository.save(admin);
         };

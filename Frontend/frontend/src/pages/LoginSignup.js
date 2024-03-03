@@ -5,8 +5,10 @@ import emailIcon from "../Assets/email.png";
 import passwordIcon from "../Assets/password.png";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useNavigate } from "react-router-dom";
 
 const LoginSignup = () => {
+  const navigate = useNavigate();
   const [action, setAction] = useState("Log In");
   const [showIcon, setShowIcon] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +28,7 @@ const LoginSignup = () => {
 
   const toggleForm = () => {
     setAction(action === "Log In" ? "Sign Up" : "Log In");
-    setName("");
+    // setName("");
     setPassword("");
     setPasswordError("");
     setShowIcon(false);
@@ -42,12 +44,15 @@ const LoginSignup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: email, password: password }),
+        body: JSON.stringify({ username: name, password: password }),
       });
       if (response.ok) {
         const data = await response.json();
         console.log("Login Success:", data);
-        alert("Welcome" + name);
+        alert("Welcome " + name);
+        const token = data.jwt;
+        localStorage.setItem("jwtToken", token);
+        navigate("/Products");
       } else {
         console.error("Login failed");
       }
@@ -64,7 +69,8 @@ const LoginSignup = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: email,
+          username: name,
+          email: email,
           password: password,
         }),
       });
@@ -111,29 +117,17 @@ const LoginSignup = () => {
         <div className="underline"></div>
       </div>
       <div className="inputs">
+        <div className="input">
+          <img src={userIcon} alt="" />
+          <input
+            type="text"
+            placeholder="Username"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
         {action === "Log In" ? (
           <div></div>
-        ) : (
-          <div className="input">
-            <img src={userIcon} alt="" />
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-        )}
-        {action === "Log In" ? (
-          <div className="input">
-            <img src={emailIcon} alt="" />
-            <input
-              type="email"
-              onChange={handleEmailChange}
-              value={email}
-              placeholder="Email"
-            />
-          </div>
         ) : (
           <div className="input">
             <img src={emailIcon} alt="" />

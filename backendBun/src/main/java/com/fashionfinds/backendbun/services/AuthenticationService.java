@@ -2,6 +2,7 @@ package com.fashionfinds.backendbun.services;
 
 import com.fashionfinds.backendbun.models.ApplicationUser;
 import com.fashionfinds.backendbun.models.LoginResponseDTO;
+import com.fashionfinds.backendbun.models.RegistrationDTO;
 import com.fashionfinds.backendbun.models.Role;
 import com.fashionfinds.backendbun.repository.RoleRepository;
 import com.fashionfinds.backendbun.repository.UserRepository;
@@ -36,15 +37,15 @@ public class AuthenticationService {
     @Autowired
     private TokenService tokenService;
 
-    public ApplicationUser registerUser(String username, String password) {
+    public ApplicationUser registerUser(RegistrationDTO body) {
 
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(body.getPassword());
         Role userRole = roleRepository.findByAuthority("USER").get();
 
         Set<Role> authorities = new HashSet<>();
 
         authorities.add(userRole);
-        return userRepository.save(new ApplicationUser(0, username, "{bcrypt}" + encodedPassword, authorities));
+        return userRepository.save(new ApplicationUser(0, body.getUsername(), body.getEmail(), "{bcrypt}" + encodedPassword, authorities));
     }
 
     public LoginResponseDTO loginUser(String username, String password) {
