@@ -6,8 +6,11 @@ import passwordIcon from "../Assets/password.png";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { success, error, info } from "../helpers/alerts.ts";
 
 const LoginSignup = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [action, setAction] = useState("Log In");
   const [showIcon, setShowIcon] = useState(false);
@@ -28,7 +31,7 @@ const LoginSignup = () => {
 
   const toggleForm = () => {
     setAction(action === "Log In" ? "Sign Up" : "Log In");
-    // setName("");
+    setName("");
     setPassword("");
     setPasswordError("");
     setShowIcon(false);
@@ -48,16 +51,15 @@ const LoginSignup = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log("Login Success:", data);
-        alert("Welcome " + name);
+        success(enqueueSnackbar, "Welcome " + name);
         const token = data.jwt;
         localStorage.setItem("jwtToken", token);
         navigate("/Products");
       } else {
-        console.error("Login failed");
+        error(enqueueSnackbar, "Login failed");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      error(enqueueSnackbar, "Login error:", error);
     }
   };
 
@@ -76,13 +78,16 @@ const LoginSignup = () => {
       });
       if (response.status === 201 || response.status === 200) {
         const data = await response.json();
-        console.log("Registration Success:", data);
-        setAction("Log In");
+        success(
+          enqueueSnackbar,
+          "Registered Successfully! Welcome, " + name + "!"
+        );
+        toggleForm();
       } else {
-        console.error("Registration failed");
+        error(enqueueSnackbar, "Registration failed");
       }
     } catch (error) {
-      console.error("Registration error:", error);
+      error(enqueueSnackbar, "Registration error:" + error);
     }
   };
 

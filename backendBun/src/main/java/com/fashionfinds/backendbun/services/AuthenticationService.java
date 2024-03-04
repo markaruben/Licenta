@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -49,6 +50,11 @@ public class AuthenticationService {
     }
 
     public LoginResponseDTO loginUser(String username, String password) {
+        Optional<ApplicationUser> userOptional = userRepository.findByUsername(username);
+        if (userOptional.isEmpty()) {
+            // Dacă utilizatorul nu există, returnează un răspuns specific
+            return new LoginResponseDTO(null, "User doesn't exist");
+        }
         try {
 
             Authentication auth = authenticationManager.authenticate(
@@ -58,7 +64,7 @@ public class AuthenticationService {
             String token = tokenService.generateJwt(auth);
             return new LoginResponseDTO(userRepository.findByUsername(username).get(), token);
         } catch (AuthenticationException e) {
-            return new LoginResponseDTO(null, "");
+            return new LoginResponseDTO(null, "Authentication Failed!");
         }
     }
 }

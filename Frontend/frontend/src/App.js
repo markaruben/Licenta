@@ -6,21 +6,24 @@ import Footer from "./Components/Footer";
 import Products from "./pages/Products";
 import About from "./pages/About";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/LogIn" element={<LoginSignup />} />
-          <Route path="/Products" element={<Products />} />
-          <Route path="/About" element={<About />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </div>
+    <SnackbarProvider maxSnack={3}>
+      <div className="App">
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/LogIn" element={<LoginSignup />} />
+            <Route path="/Products" element={<Products />} />
+            <Route path="/About" element={<About />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </div>
+    </SnackbarProvider>
   );
 }
 
