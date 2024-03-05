@@ -101,3 +101,29 @@
     width: 90%;
   }
 }
+
+.loginPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  padding-bottom: 20%;
+}
+
+.loginPrompt p {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333; /* Schimbă culoarea textului după preferințe */
+}
+
+.loginPrompt button {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white; /* Culoarea textului în buton */
+  background-color: #121619; /* Culoarea de fundal a butonului, poți ajusta după preferințe */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

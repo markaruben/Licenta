@@ -1,5 +1,7 @@
 package com.fashionfinds.backendbun.services;
 
+import com.fashionfinds.backendbun.exceptions.AuthenticationFailedException;
+import com.fashionfinds.backendbun.exceptions.UserNotFoundException;
 import com.fashionfinds.backendbun.models.ApplicationUser;
 import com.fashionfinds.backendbun.models.LoginResponseDTO;
 import com.fashionfinds.backendbun.models.RegistrationDTO;
@@ -52,11 +54,9 @@ public class AuthenticationService {
     public LoginResponseDTO loginUser(String username, String password) {
         Optional<ApplicationUser> userOptional = userRepository.findByUsername(username);
         if (userOptional.isEmpty()) {
-            // Dacă utilizatorul nu există, returnează un răspuns specific
-            return new LoginResponseDTO(null, "User doesn't exist");
+            throw new UserNotFoundException("User doesn't exist");
         }
         try {
-
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
@@ -64,7 +64,8 @@ public class AuthenticationService {
             String token = tokenService.generateJwt(auth);
             return new LoginResponseDTO(userRepository.findByUsername(username).get(), token);
         } catch (AuthenticationException e) {
-            return new LoginResponseDTO(null, "Authentication Failed!");
+            throw new AuthenticationFailedException("Authentication Failed!");
         }
     }
+
 }

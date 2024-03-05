@@ -3,9 +3,18 @@ import ReorderIcon from "@mui/icons-material/Reorder";
 import Logo from "../Assets/app-logo.png";
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [openLinks, setOpenLinks] = useState(false);
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!localStorage.getItem("jwtToken");
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwtToken");
+    navigate("/");
+  };
 
   const toggleNavbar = () => {
     setOpenLinks(!openLinks);
@@ -30,10 +39,15 @@ function Navbar() {
             {" "}
             About&nbsp;us{" "}
           </Link>
-          <Link to="/LogIn" onClick={toggleNavbar}>
-            {" "}
-            Log&nbsp;in
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/" onClick={handleLogout}>
+              Log&nbsp;Out
+            </Link>
+          ) : (
+            <Link to="/LogIn" onClick={toggleNavbar}>
+              Log&nbsp;In
+            </Link>
+          )}
         </div>
       </div>
       <div className="rightSide">
@@ -49,10 +63,15 @@ function Navbar() {
           {" "}
           About us{" "}
         </Link>
-        <Link to="/LogIn" className="nav-link">
-          {" "}
-          Log in
-        </Link>
+        {isLoggedIn ? (
+          <Link to="/" className="nav-link" onClick={handleLogout}>
+            Log Out
+          </Link>
+        ) : (
+          <Link to="/LogIn" className="nav-link">
+            Log In
+          </Link>
+        )}
         <button onClick={toggleNavbar}>
           <ReorderIcon />
         </button>
