@@ -23,6 +23,7 @@
   height: 60px;
   font-weight: 50;
   color: black;
+  margin-bottom: 30px;
 }
 
 .headerContainer p {
@@ -30,6 +31,12 @@
   font-size: 40px;
   font-weight: lighter;
   color: black;
+  margin-bottom: 30px;
+}
+
+.no-products {
+  font-size: 20px;
+  margin-bottom: 50%;
 }
 
 .headerContainer button {

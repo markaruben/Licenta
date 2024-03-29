@@ -35,9 +35,9 @@ function Navbar() {
             {" "}
             Products{" "}
           </Link>
-          <Link to="/About" onClick={toggleNavbar}>
+          <Link to="/Profile" onClick={toggleNavbar}>
             {" "}
-            About&nbsp;us{" "}
+            Profile{" "}
           </Link>
           {isLoggedIn ? (
             <Link to="/" onClick={handleLogout}>
@@ -59,9 +59,9 @@ function Navbar() {
           {" "}
           Products{" "}
         </Link>
-        <Link to="/About" className="nav-link">
+        <Link to="/Profile" className="nav-link">
           {" "}
-          About us{" "}
+          Profile{" "}
         </Link>
         {isLoggedIn ? (
           <Link to="/" className="nav-link" onClick={handleLogout}>

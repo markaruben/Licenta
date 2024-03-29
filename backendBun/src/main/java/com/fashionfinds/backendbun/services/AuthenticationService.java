@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,9 @@ public class AuthenticationService {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private JwtDecoder jwtDecoder;
 
     public ApplicationUser registerUser(RegistrationDTO body) {
 
@@ -66,6 +70,14 @@ public class AuthenticationService {
         } catch (AuthenticationException e) {
             throw new AuthenticationFailedException("Authentication Failed!");
         }
+    }
+
+    public String getUsernameFromToken(String token) {
+        var jwt = jwtDecoder.decode(token);
+        return jwt.getClaimAsString("sub"); // Assuming 'sub' contains the username
+    }
+    public Optional<ApplicationUser> loadUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 }

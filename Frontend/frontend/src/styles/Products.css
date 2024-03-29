@@ -7,6 +7,7 @@
   flex-direction: column;
 }
 .products .productsTitle {
+  padding-top: 50px;
   font-size: 60px;
 }
 
@@ -126,4 +127,11 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.addProdButton {
+  background-color: #121619; /* Button color to stand out */
+  color: white;
+  cursor: pointer;
+  border: 1px solid #121619;
 }

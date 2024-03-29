@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* This ensures padding does not affect total width */
+}
+
+.profile-page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; /* Center the containers on the page */
+  margin-top: 20px;
+}
+
+.profile-container {
+  width: 50%; /* Adjust width as needed */ /* Assuming you want a white background */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Simple shadow for depth */
+  border-radius: 4px; /* Slight rounding of corners for aesthetics */
+  margin-bottom: 20px; /* Space between profile and favorite products */
+}
+
+.favorites-container {
+  width: 100%; /* Match width of profile container for alignment */
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Align children horizontally */
+}
+.favorites-title {
+  margin-bottom: 1.5rem;
+  color: #333; /* Or another color */
+  font-size: 1.5rem; /* Adjust to match your headings */
+}
+.profile-title {
+  margin-bottom: 1.5rem;
+  color: #333; /* Or another color */
+  font-size: 1.5rem; /* Adjust to match your headings */
+}
+
+.user-detail {
+  color: #555; /* Or your text color */
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.login-container {
+  justify-content: center; /* Center children along the main axis */
+  align-items: center; /* Center children along the cross axis */
+  height: 100vh; /* Fill the entire height of the viewport */
+  text-align: center;
+  padding-top: 200px;
+}
+
+.login-message {
+  margin-bottom: 20px;
+  font-size: 3rem;
+}
+
+.logButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white; /* Culoarea textului în buton */
+  background-color: #121619;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-list {
+  width: 90%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  place-items: center;
+  padding: 0 20px; /* Add padding to avoid edges on small screens */
+}
+
+.productItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  width: 300px;
+  height: 350px;
+  margin: 20px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in;
+}
+
+.productItem:hover {
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+.productItem > div {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productItem > div img {
+  max-width: 100%;
+  max-height: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.productItem h1,
+.productItem p {
+  text-align: center;
+  margin: 10px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .product-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .searchBar {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .product-list {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+  .searchBar {
+    width: 90%;
+  }
+}

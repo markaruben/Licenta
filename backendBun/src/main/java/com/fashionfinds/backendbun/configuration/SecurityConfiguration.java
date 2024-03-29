@@ -50,21 +50,30 @@ public class SecurityConfiguration {
         return new ProviderManager(daoProvider);
     }
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .csrf(csrf -> csrf.disable())
+//                .authorizeHttpRequests(auth -> {
+//                    auth.requestMatchers("/auth/**").permitAll();
+//                    auth.requestMatchers("/products/fetchAll").permitAll();
+//                    auth.anyRequest().authenticated();
+//                })
+//                // Updated configuration to use jwt(Customizer)
+//                .oauth2ResourceServer(oauth2ResourceServer ->
+//                        oauth2ResourceServer.jwt(jwt ->
+//                                jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
+//                        )
+//                )
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .build();
+//    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/**").permitAll();
-                    auth.anyRequest().authenticated();
-                })
-                // Updated configuration to use jwt(Customizer)
-                .oauth2ResourceServer(oauth2ResourceServer ->
-                        oauth2ResourceServer.jwt(jwt ->
-                                jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
-                        )
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .build();
     }
 

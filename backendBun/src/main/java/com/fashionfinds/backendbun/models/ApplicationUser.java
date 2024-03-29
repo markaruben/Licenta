@@ -32,6 +32,22 @@ public class ApplicationUser implements UserDetails {
     )
     private Set<Role> authorities;
 
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @JoinTable(
+            name = "user_favorite_products", // Custom join table name
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> favoriteProducts = new HashSet<>();
+
+    public Set<Product> getFavoriteProducts() {
+        return favoriteProducts;
+    }
+
+    public void setFavoriteProducts(Set<Product> favoriteProducts) {
+        this.favoriteProducts = favoriteProducts;
+    }
+
     public ApplicationUser() {
         super();
         this.authorities = new HashSet<Role>();

@@ -58,8 +58,8 @@ const LoginSignup = () => {
       } else {
         error(enqueueSnackbar, "Login failed");
       }
-    } catch (error) {
-      error(enqueueSnackbar, "Login error:", error);
+    } catch (e) {
+      error(enqueueSnackbar, "Login error:", e);
     }
   };
 
@@ -86,8 +86,8 @@ const LoginSignup = () => {
       } else {
         error(enqueueSnackbar, "Registration failed");
       }
-    } catch (error) {
-      error(enqueueSnackbar, "Registration error:" + error);
+    } catch (e) {
+      error(enqueueSnackbar, "Registration error:" + e);
     }
   };
 
