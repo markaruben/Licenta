@@ -1,8 +1,21 @@
 import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite"; // import for colored icon
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate } from "react-router-dom";
 
-function ProductItem({ id, image, name, price, onFavClick, isFavorited }) {
+function ProductItem({
+  id,
+  image,
+  name,
+  price,
+  onFavClick,
+  isFavorited,
+  isAdmin,
+}) {
+  const navigate = useNavigate();
+  const handleEditClick = () => {
+    navigate(`/EditProduct/${id}`);
+  };
   return (
     <div className="productItem">
       <div
@@ -18,6 +31,11 @@ function ProductItem({ id, image, name, price, onFavClick, isFavorited }) {
       >
         {isFavorited ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </span>
+      {isAdmin && (
+        <button className="editButton" onClick={handleEditClick}>
+          Edit
+        </button>
+      )}
     </div>
   );
 }

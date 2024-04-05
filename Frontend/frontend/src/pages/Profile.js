@@ -36,6 +36,7 @@ function Profile() {
         const data = await response.json();
 
         setUserDetails(data);
+        console.log(userDetails);
 
         return data.id;
       } catch (error) {
@@ -131,6 +132,7 @@ function Profile() {
         <h2 className="profile-title">User Details</h2>
         <p className="user-detail">Name: {userDetails.username}</p>
         <p className="user-detail">Email: {userDetails.email}</p>
+        <p className="user-detail">Role: {userDetails.role}</p>
       </div>
       <div className="favorites-container">
         <h3>Favorite Products</h3>
@@ -139,7 +141,7 @@ function Profile() {
             favoriteProducts.map((product, index) => (
               <ProductItem
                 key={product.id}
-                image={product.image}
+                image={product.imageUrl}
                 name={product.name}
                 price={product.price}
                 isFavorited={true}

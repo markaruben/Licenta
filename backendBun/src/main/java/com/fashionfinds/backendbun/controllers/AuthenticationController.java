@@ -3,6 +3,7 @@ package com.fashionfinds.backendbun.controllers;
 import com.fashionfinds.backendbun.models.ApplicationUser;
 import com.fashionfinds.backendbun.models.LoginResponseDTO;
 import com.fashionfinds.backendbun.models.RegistrationDTO;
+import com.fashionfinds.backendbun.models.Role;
 import com.fashionfinds.backendbun.services.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -52,10 +51,15 @@ public class AuthenticationController {
             user = userIDK.get();
         }
 
+        Collection<String> role = user.getRoleNames();
+        String[] roleArray = role.toArray(new String[0]);
+
         Map<String, Object> userDetails = new HashMap<>();
         userDetails.put("id", user.getUserId());
         userDetails.put("username", user.getUsername());
         userDetails.put("email", user.getEmail());
+        userDetails.put("role", roleArray[0]);
+
 
         return ResponseEntity.ok(userDetails);
     }

@@ -7,6 +7,7 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import AddProduct from "./pages/AddProduct";
+import EditProduct from "./pages/EditProduct";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/Products" element={<Products />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/AddProduct" element={<AddProduct />} />
+            <Route path="EditProduct/:id" element={<EditProduct />} />
           </Routes>
           <Footer />
         </Router>

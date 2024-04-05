@@ -130,8 +130,23 @@
 }
 
 .addProdButton {
-  background-color: #121619; /* Button color to stand out */
+  background-color: #121619; /* Green */
   color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border: 1px solid #121619;
+  margin-bottom: 2.5%;
+}
+
+.editButton {
+  background-color: #121619; /* Green */
+  color: white;
+  padding: 5px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 2.5%;
 }

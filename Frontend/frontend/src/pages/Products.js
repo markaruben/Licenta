@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductItem from "../Components/ProductItem";
 import "../styles/Products.css";
 import { useNavigate } from "react-router-dom";
+import { Dining } from "@mui/icons-material";
 
 function Products() {
   const [userDetails, setUserDetails] = useState("");
@@ -149,9 +150,10 @@ function Products() {
             {filteredProducts.map((productItem) => (
               <div key={productItem.id}>
                 {" "}
-                {/* Use productItem.id for key */}
+                {}
                 <ProductItem
-                  image={productItem.image}
+                  id={productItem.id}
+                  image={productItem.imageUrl}
                   name={productItem.name}
                   price={productItem.price}
                   isFavorited={isProductFavorited(productItem.id)}
@@ -161,15 +163,23 @@ function Products() {
                       isProductFavorited(productItem.id)
                     )
                   }
+                  isAdmin={userDetails.role === "ADMIN"}
                 />
               </div>
             ))}
           </div>
         </>
       )}
-      <button className="addProdButton" onClick={() => navigate("/AddProduct")}>
-        Add Product
-      </button>
+      {userDetails.role === "ADMIN" ? (
+        <button
+          className="addProdButton"
+          onClick={() => navigate("/AddProduct")}
+        >
+          Add Product
+        </button>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
