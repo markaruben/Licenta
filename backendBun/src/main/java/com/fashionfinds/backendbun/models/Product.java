@@ -3,6 +3,7 @@ package com.fashionfinds.backendbun.models;
 import jakarta.persistence.*;
 import org.apache.catalina.User;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,14 +15,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
-    private String description;
-    private double price;
-    private String imageUrl;
+    private String title;
+
+    private String  price;
+    private String productUrl;
 
     @ManyToMany(mappedBy = "favoriteProducts")
     private Set<ApplicationUser> usersWhoFavorited = new HashSet<>();
-
 
     public Integer getId() {
         return id;
@@ -31,35 +31,36 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String  price) {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getProductUrl() {
+        return productUrl;
+    }
+
+    public void setProductUrl(String productUrl) {
+        this.productUrl = productUrl;
+    }
+
+    public Set<ApplicationUser> getUsersWhoFavorited() {
+        return usersWhoFavorited;
+    }
+
+    public void setUsersWhoFavorited(Set<ApplicationUser> usersWhoFavorited) {
+        this.usersWhoFavorited = usersWhoFavorited;
     }
 }

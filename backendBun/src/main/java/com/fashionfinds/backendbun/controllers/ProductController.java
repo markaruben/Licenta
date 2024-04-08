@@ -18,16 +18,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
-        Product createdProduct = productService.createProduct(
-                productDTO.getName(),
-                productDTO.getDescription(),
-                productDTO.getPrice(),
-                productDTO.getImageUrl()
-        );
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
+//        Product createdProduct = productService.createProduct(
+//                productDTO.getName(),
+//                productDTO.getDescription(),
+//                productDTO.getPrice(),
+//                productDTO.getImageUrl()
+//        );
+//        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+//    }
 
     @GetMapping("/{productId}") // Endpoint to get product by ID
     public ResponseEntity<Product> getProductById(@PathVariable Integer productId) {
@@ -40,19 +40,19 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @PutMapping("/update/{productId}")
-    public ResponseEntity<Product> updateProduct(
-            @PathVariable Integer productId,
-            @RequestBody ProductDTO productDTO) {
-        Product updatedProduct = productService.updateProduct(
-                productId,
-                productDTO.getName(),
-                productDTO.getDescription(),
-                productDTO.getPrice(),
-                productDTO.getImageUrl()
-        );
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
-    }
+//    @PutMapping("/update/{productId}")
+//    public ResponseEntity<Product> updateProduct(
+//            @PathVariable Integer productId,
+//            @RequestBody ProductDTO productDTO) {
+//        Product updatedProduct = productService.updateProduct(
+//                productId,
+//                productDTO.getName(),
+//                productDTO.getDescription(),
+//                productDTO.getPrice(),
+//                productDTO.getImageUrl()
+//        );
+//        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+//    }
 
     // Method to delete a product
     @DeleteMapping("/delete/{productId}")
