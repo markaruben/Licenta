@@ -7,14 +7,12 @@ import { toggleButtonClasses } from "@mui/material";
 function Profile() {
   const [userDetails, setUserDetails] = useState("");
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const jwtToken = localStorage.getItem("jwtToken");
     if (!jwtToken) {
-      setLoading(false);
       setIsAuthenticated(false);
       return;
     }
@@ -39,19 +37,15 @@ function Profile() {
         console.log(userDetails);
 
         return data.id;
-      } catch (error) {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-        setLoading(false);
+      } catch (e) {
+        console.error("There has been a problem with your fetch operation:", e);
       }
     };
 
     const fetchFavoriteProducts = async (userId) => {
       try {
         const response = await fetch(
-          `http://localhost:8000/user/${userId}/favorites`,
+          `http://localhost:8000/products/user/${userId}/favorite-products`,
           {
             method: "GET",
             headers: new Headers({
@@ -72,9 +66,7 @@ function Profile() {
 
     fetchUserDetails().then((userId) => {
       if (userId) {
-        fetchFavoriteProducts(userId).finally(() => setLoading(false));
-      } else {
-        setLoading(false);
+        fetchFavoriteProducts(userId);
       }
     });
   }, [navigate]);
@@ -88,7 +80,7 @@ function Profile() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/user/${userDetails.id}/favorites/${productId}`,
+        `http://localhost:8000/products/removeFavorite/${userDetails.id}/${productId}`,
         {
           method: "DELETE",
           headers: new Headers({
@@ -101,8 +93,6 @@ function Profile() {
       if (!response.ok) {
         throw new Error("Failed to remove the product from favorites.");
       }
-
-      // Filter out the removed product from the favoriteProducts state
       setFavoriteProducts(
         favoriteProducts.filter((product) => product.id !== productId)
       );
@@ -110,10 +100,6 @@ function Profile() {
       console.error("Error removing product from favorites:", error);
     }
   };
-
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
 
   if (!isAuthenticated) {
     return (
@@ -132,7 +118,6 @@ function Profile() {
         <h2 className="profile-title">User Details</h2>
         <p className="user-detail">Name: {userDetails.username}</p>
         <p className="user-detail">Email: {userDetails.email}</p>
-        <p className="user-detail">Role: {userDetails.role}</p>
       </div>
       <div className="favorites-container">
         <h3>Favorite Products</h3>
@@ -141,11 +126,12 @@ function Profile() {
             favoriteProducts.map((product, index) => (
               <ProductItem
                 key={product.id}
+                id={product.id}
                 image={product.imageUrl}
                 name={product.name}
                 price={product.price}
                 isFavorited={true}
-                onFavClick={() => removeFromFavorites(product.id)}
+                onRemoveClick={() => removeFromFavorites(product.id)}
               />
             ))
           ) : (

@@ -31,7 +31,7 @@ function Navbar() {
             {" "}
             Home{" "}
           </Link>
-          <Link to="/Products" onClick={toggleNavbar}>
+          <Link to="/FavoriteProduct" onClick={toggleNavbar}>
             {" "}
             Products{" "}
           </Link>
@@ -55,7 +55,7 @@ function Navbar() {
           {" "}
           Home{" "}
         </Link>
-        <Link to="/Products" className="nav-link">
+        <Link to="/FavoriteProduct" className="nav-link">
           {" "}
           Products{" "}
         </Link>

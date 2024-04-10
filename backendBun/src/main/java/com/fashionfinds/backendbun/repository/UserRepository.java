@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<ApplicationUser, Integer> {
     Optional<ApplicationUser> findByUsername(String username);
 
-    List<ApplicationUser> findByFavoriteProductsContains(Product product);
 }

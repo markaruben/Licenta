@@ -3,13 +3,11 @@ import Home from "./pages/Home";
 import Navbar from "./Components/Navbar";
 import LoginSignup from "./pages/LoginSignup";
 import Footer from "./Components/Footer";
-import Products from "./pages/Products";
-import About from "./pages/About";
 import Profile from "./pages/Profile";
-import AddProduct from "./pages/AddProduct";
-import EditProduct from "./pages/EditProduct";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
+import FavoriteProduct from "./pages/FavoriteProduct";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -20,10 +18,9 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/LogIn" element={<LoginSignup />} />
-            <Route path="/Products" element={<Products />} />
+            <Route path="/FavoriteProduct" element={<FavoriteProduct />} />
             <Route path="/Profile" element={<Profile />} />
-            <Route path="/AddProduct" element={<AddProduct />} />
-            <Route path="EditProduct/:id" element={<EditProduct />} />
+            <Route path={`/product/:id`} element={<Product />} />
           </Routes>
           <Footer />
         </Router>

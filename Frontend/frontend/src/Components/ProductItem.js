@@ -1,41 +1,42 @@
 import React from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 
-function ProductItem({
-  id,
-  image,
-  name,
-  price,
-  onFavClick,
-  isFavorited,
-  isAdmin,
-}) {
+function ProductItem({ id, image, name, price, onRemoveClick }) {
   const navigate = useNavigate();
-  const handleEditClick = () => {
-    navigate(`/EditProduct/${id}`);
+  const handleClick = () => {
+    navigate(`/Product/${id}`);
+  };
+  const handleRemoveClick = (event) => {
+    event.stopPropagation();
+    onRemoveClick(id);
   };
   return (
-    <div className="productItem">
+    <div
+      className="productItem"
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
       <div
-        style={{ backgroundImage: `url(${image})` }}
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundSize: "cover", // Ensure the image covers the container
+          backgroundPosition: "center", // Center the image within the container
+          width: "200px", // Set the width of the container
+          height: "200px", // Set the height of the container
+          marginTop: "10px",
+        }}
         className="productImage"
       ></div>
       <h1>{name}</h1>
-      <p>${price}</p>
+      <p>{price} Lei</p>
       <span
-        className="fav-icon"
+        className="remove-icon"
         style={{ cursor: "pointer" }}
-        onClick={() => onFavClick(id, isFavorited)}
+        onClick={handleRemoveClick}
       >
-        {isFavorited ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        <DeleteIcon />
       </span>
-      {isAdmin && (
-        <button className="editButton" onClick={handleEditClick}>
-          Edit
-        </button>
-      )}
     </div>
   );
 }

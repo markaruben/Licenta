@@ -1,0 +1,62 @@
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.logged-out-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.logged-out-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logged-out-container h2 {
+  margin-bottom: 20px;
+}
+
+.logged-out-container p {
+  margin-bottom: 20px;
+}
+
+.log-in-btn {
+  padding: 10px 20px;
+  background-color: #121619;
+  color: white;
+  border: 2px solid #121619;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.log-in-btn:hover {
+  background-color: white;
+  color: #121619;
+}

@@ -33,22 +33,6 @@ public class ApplicationUser implements UserDetails {
     )
     private Set<Role> authorities;
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    @JoinTable(
-            name = "user_favorite_products", // Custom join table name
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> favoriteProducts = new HashSet<>();
-
-    public Set<Product> getFavoriteProducts() {
-        return favoriteProducts;
-    }
-
-    public void setFavoriteProducts(Set<Product> favoriteProducts) {
-        this.favoriteProducts = favoriteProducts;
-    }
-
     public ApplicationUser() {
         super();
         this.authorities = new HashSet<Role>();
@@ -60,6 +44,17 @@ public class ApplicationUser implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                '}';
     }
 
     public String getEmail() {

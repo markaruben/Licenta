@@ -10,6 +10,17 @@ import java.util.Set;
 @Entity
 @Table(name = "products")
 public class Product {
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price='" + price + '\'' +
+                ", productUrl='" + productUrl + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", userProducts=" + userProducts +
+                '}';
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,11 +28,21 @@ public class Product {
 
     private String title;
 
-    private String  price;
+    private String price;
     private String productUrl;
 
-    @ManyToMany(mappedBy = "favoriteProducts")
-    private Set<ApplicationUser> usersWhoFavorited = new HashSet<>();
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @OneToMany(mappedBy = "product")
+    private Set<UserProduct> userProducts = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -36,7 +57,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(String  price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -56,11 +77,11 @@ public class Product {
         this.productUrl = productUrl;
     }
 
-    public Set<ApplicationUser> getUsersWhoFavorited() {
-        return usersWhoFavorited;
+    public Set<UserProduct> getUserProducts() {
+        return userProducts;
     }
 
-    public void setUsersWhoFavorited(Set<ApplicationUser> usersWhoFavorited) {
-        this.usersWhoFavorited = usersWhoFavorited;
+    public void setUserProducts(Set<UserProduct> userProducts) {
+        this.userProducts = userProducts;
     }
 }

@@ -54,7 +54,7 @@ const LoginSignup = () => {
         success(enqueueSnackbar, "Welcome " + name);
         const token = data.jwt;
         localStorage.setItem("jwtToken", token);
-        navigate("/Products");
+        navigate("/Profile");
       } else {
         error(enqueueSnackbar, "Login failed");
       }
