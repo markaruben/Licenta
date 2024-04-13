@@ -5,6 +5,7 @@ import com.fashionfinds.backendbun.models.ProductDTO;
 import com.fashionfinds.backendbun.models.UserProduct;
 import com.fashionfinds.backendbun.models.UserProductDTO;
 import com.fashionfinds.backendbun.repository.UserProductRepository;
+import com.fashionfinds.backendbun.services.EmailService;
 import com.fashionfinds.backendbun.services.ProductService;
 import com.fashionfinds.backendbun.utils.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ProductController {
 
     @Autowired
     private UserProductRepository userProductRepository;
+
+    @Autowired
+    EmailService emailService;
 
 //    @PostMapping("/create")
 //    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
@@ -97,6 +101,31 @@ public class ProductController {
             return ResponseEntity.badRequest().body("Invalid user ID or product ID.");
         }
     }
+
+    @PostMapping("/notifyPriceChange")
+    public ResponseEntity<String> notifyPriceChange(@RequestBody Map<String, String> requestParams) {
+        Integer productId = Integer.parseInt(requestParams.get("productId"));
+        double newPrice = Double.parseDouble(requestParams.get("price"));
+        Set<UserProduct> userProducts = userProductRepository.findUserProductsByProduct_Id(productId);
+        for (UserProduct userProduct : userProducts) {
+            if (newPrice < Double.parseDouble(userProduct.getThresholdPrice())) {
+                notifyUser(userProduct.getUser().getEmail(),userProduct.getProduct().getTitle(),Double.parseDouble(userProduct.getThresholdPrice()), newPrice,userProduct.getProduct().getProductUrl());
+            }
+        }
+        return ResponseEntity.ok("Price change notifications sent successfully");
+    }
+
+    private void notifyUser(String userEmail, String productTitle, double thresholdPrice, double newPrice, String productUrl) {
+        String subject = "Price Drop Notification";
+        String body = "Hello!\n\nThe price of the product '" + productTitle + "' has dropped below your threshold price.\n\n"
+                + "Threshold Price: " + thresholdPrice + "Lei \n"
+                + "New Price: " + newPrice + "Lei \n"
+                + "Product URL: " + productUrl + "\n\n"
+                + "Visit our website to update your preferences.\n\n"
+                + "Thank you for using our service.";
+        emailService.sendMail(userEmail,new String[0],subject, body);
+    }
+
 
 
     @PostMapping("/addProduct/{userId}")

@@ -54,6 +54,11 @@ public class ProductService {
                 .orElseThrow(() -> new IllegalArgumentException("UserProduct not found with ID: " + userProductId));
 
         userProductRepository.delete(userProduct);
+
+        Set<UserProduct> userProductsByProdId= userProductRepository.findUserProductsByProduct_Id(userProduct.getProduct().getId());
+        if (userProductsByProdId.isEmpty()) {
+            productRepository.delete(userProduct.getProduct());
+        }
     }
 
     @Transactional

@@ -16,8 +16,13 @@ import java.util.Set;
 @Repository
 public interface UserProductRepository extends JpaRepository<UserProduct, Integer> {
     Set<UserProduct> findUserProductsByUser_userId(Integer userId);
+
     UserProduct findUserProductByUser_userIdAndProduct_Id(Integer userId, Integer productId);
+
     boolean existsByUser_userIdAndProduct_id(Integer userId, Integer productId);
+
+    Set<UserProduct> findUserProductsByProduct_Id(Integer productId);
+
     @Query("SELECT up.id FROM UserProduct up WHERE up.user.id = :userId AND up.product.id = :productId")
     Integer findUserProductIdByUserAndProduct(@Param("userId") Integer userId, @Param("productId") Integer productId);
 
