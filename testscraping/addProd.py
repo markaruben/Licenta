@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 def extract_price(price_string, pattern):
     match = re.search(pattern, price_string)
@@ -14,8 +15,15 @@ def extract_price(price_string, pattern):
 patternNoComma = r'\d+[.,]?\d+'
 patternComma = r'\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?'
 
+def format_price(price):
+    price = price.replace('.', '')
+    price = price.replace(',', '.')
+    return price
+
 def get_product_info(url):
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
     
     try:
@@ -59,6 +67,10 @@ def get_product_info(url):
 
 
 def add_to_database(title, price, url, image_url):
+    # Format the price string
+    price = format_price(price)
+
+    # Rest of your code remains the same
     if len(url) > 255:
         url = url[:255]
     if len(image_url) > 255:

@@ -2,6 +2,8 @@ package com.fashionfinds.backendbun.controllers;
 
 import com.fashionfinds.backendbun.models.Product;
 import com.fashionfinds.backendbun.models.ProductDTO;
+import com.fashionfinds.backendbun.models.UserProduct;
+import com.fashionfinds.backendbun.models.UserProductDTO;
 import com.fashionfinds.backendbun.repository.UserProductRepository;
 import com.fashionfinds.backendbun.services.ProductService;
 import com.fashionfinds.backendbun.utils.ProductMapper;
@@ -142,11 +144,26 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/getUserProduct/{userId}/{productId}")
+    public ResponseEntity<UserProductDTO> getUserProduct(@PathVariable Integer userId, @PathVariable Integer productId) {
+        UserProduct userProduct = userProductRepository.findUserProductByUser_userIdAndProduct_Id(userId, productId);
+        if (userProduct == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        UserProductDTO userProductDTO = new UserProductDTO();
+        userProductDTO.setId(userProduct.getId());
+        userProductDTO.setUserId(userProduct.getUser().getUserId());
+        userProductDTO.setProductId(userProduct.getProduct().getId());
+        userProductDTO.setThresholdPrice(userProduct.getThresholdPrice());
+
+        return ResponseEntity.ok(userProductDTO);
+    }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer productId) {
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer productId) {
         Product product = productService.getProductById(productId);
-        return ResponseEntity.ok(product);
+        ProductMapper productMapper = new ProductMapper();
+        return ResponseEntity.ok(productMapper.singleConvertToDTO(product));
     }
 
 
@@ -160,5 +177,15 @@ public class ProductController {
         productService.deleteProduct(productId);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/{userProductId}/threshold-price")
+    public ResponseEntity<String> updateUserProductThresholdPrice(@PathVariable Integer userProductId, @RequestBody String thresholdPrice) {
+        // Parse the thresholdPrice string to extract the numeric value
+        Double numericThresholdPrice = Double.parseDouble(thresholdPrice.replaceAll("[^0-9.]", ""));
+
+        userProductRepository.updateUserProductThresholdPrice(userProductId, numericThresholdPrice.toString());
+        return ResponseEntity.status(HttpStatus.OK).body("Threshold price updated successfully");
+    }
+
 
 }

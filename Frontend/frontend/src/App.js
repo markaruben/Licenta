@@ -20,7 +20,7 @@ function App() {
             <Route path="/LogIn" element={<LoginSignup />} />
             <Route path="/FavoriteProduct" element={<FavoriteProduct />} />
             <Route path="/Profile" element={<Profile />} />
-            <Route path={`/product/:id`} element={<Product />} />
+            <Route path={`/product/:productId`} element={<Product />} />
           </Routes>
           <Footer />
         </Router>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../styles/Profile.css";
 import { useNavigate } from "react-router-dom";
 import ProductItem from "../Components/ProductItem";
-import { toggleButtonClasses } from "@mui/material";
 
 function Profile() {
   const [userDetails, setUserDetails] = useState("");
@@ -126,7 +125,7 @@ function Profile() {
             favoriteProducts.map((product, index) => (
               <ProductItem
                 key={product.id}
-                id={product.id}
+                productId={product.id}
                 image={product.imageUrl}
                 name={product.name}
                 price={product.price}

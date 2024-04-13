@@ -11,10 +11,10 @@ function Home() {
       }}
     >
       <div className="headerContainer">
-        <h1>Stylish Savings</h1>
-        <p>Exclusive Discounts Await!</p>
-        <Link to="/products">
-          <button>Explore Deals!</button>
+        <h1>Welcome to DealTrackr</h1>
+        <p>Start Saving on Your Favorite Products!</p>
+        <Link to="/FavoriteProduct">
+          <button>Start Tracking</button>
         </Link>
       </div>
     </div>

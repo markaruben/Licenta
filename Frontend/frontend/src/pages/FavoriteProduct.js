@@ -68,8 +68,7 @@ function FavoriteProduct() {
         error(enqueueSnackbar, responseData);
         return;
       }
-
-      success(enqueueSnackbar, responseData);
+      success(enqueueSnackbar, "Product added to favorites!");
     } catch (e) {
       error(enqueueSnackbar, "Error: " + e.message);
     }

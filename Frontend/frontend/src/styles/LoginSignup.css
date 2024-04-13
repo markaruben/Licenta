@@ -1,4 +1,4 @@
-.container {
+.ls-container {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -9,7 +9,7 @@
   margin-bottom: 1%;
 }
 
-.header {
+.ls-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,27 +18,27 @@
   margin-top: 10%;
 }
 
-.text {
+.ls-text {
   color: #121619;
   font-size: 250%;
   font-weight: 700;
 }
 
-.underline {
+.ls-underline {
   width: 15%;
   height: 6px;
   background: #121619;
   border-radius: 9px;
 }
 
-.inputs {
+.ls-inputs {
   margin-top: 10%;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.input {
+.ls-input-login {
   display: flex;
   align-items: center;
   margin: auto;
@@ -48,44 +48,48 @@
   border-radius: 6px;
 }
 
-.input img {
+.ls-input-login img {
   margin: 0% 5%;
 }
 
-.input input {
+.ls-input-login input {
   height: 50px;
   width: 100%;
   background: transparent;
-  border: none;
+  border: none; /* Remove border */
   outline: none;
   color: #797979;
   font-size: 100%;
 }
+.ls-input-login input[type="text"],
+.ls-input-login input[type="number"] {
+  border: none;
+}
 
-.forgot-password {
+.ls-forgot-password {
   padding-left: 10%;
   margin-top: 5%;
   color: #797979;
   font-size: 100%;
 }
 
-.forgot-password span {
+.ls-forgot-password span {
   color: #121619;
   cursor: pointer;
 }
 
-.input span {
+.ls-input-login span {
   cursor: pointer;
   padding-right: 10px;
 }
 
-.submit-container {
+.ls-submit-container {
   display: flex;
   gap: 10%;
   margin: 5% auto;
 }
 
-.error {
+.ls-error {
   color: #ff5252; /* Error message color */
   font-size: 90%; /* Adjust font size as needed */
   margin-top: 5px; /* Add spacing from the input field */
@@ -95,7 +99,7 @@
   text-align: left;
 }
 
-.submit {
+.ls-submit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,7 +119,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .container {
+  .ls-container {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -125,13 +129,13 @@
     padding-bottom: 1%;
   }
 
-  .submit-container {
+  .ls-submit-container {
     display: flex;
     gap: 10%;
     margin: 20% 20%;
   }
 
-  .submit {
+  .ls-submit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,7 +154,7 @@
   }
 }
 
-.toggle-action {
+.ls-toggle-action {
   display: flex;
   justify-content: center;
   font-size: 100%;
@@ -158,11 +162,11 @@
   margin-bottom: 10%;
 }
 
-.toggle-action p {
+.ls-toggle-action p {
   margin: 0;
 }
 
-.toggle-action span {
+.ls-toggle-action span {
   color: #121619;
   font-weight: 700;
   cursor: pointer;

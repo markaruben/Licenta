@@ -2,14 +2,14 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 
-function ProductItem({ id, image, name, price, onRemoveClick }) {
+function ProductItem({ productId, image, name, price, onRemoveClick }) {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/Product/${id}`);
+    navigate(`/Product/${productId}`);
   };
   const handleRemoveClick = (event) => {
     event.stopPropagation();
-    onRemoveClick(id);
+    onRemoveClick(productId);
   };
   return (
     <div
@@ -20,10 +20,10 @@ function ProductItem({ id, image, name, price, onRemoveClick }) {
       <div
         style={{
           backgroundImage: `url(${image})`,
-          backgroundSize: "cover", // Ensure the image covers the container
-          backgroundPosition: "center", // Center the image within the container
-          width: "200px", // Set the width of the container
-          height: "200px", // Set the height of the container
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "200px",
+          height: "200px",
           marginTop: "10px",
         }}
         className="productImage"

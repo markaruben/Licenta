@@ -116,13 +116,13 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div>
+    <div className="ls-container">
+      <div className="ls-header">
+        <div className="ls-text">{action}</div>
+        <div className="ls-underline"></div>
       </div>
-      <div className="inputs">
-        <div className="input">
+      <div className="ls-inputs">
+        <div className="ls-input-login">
           <img src={userIcon} alt="" />
           <input
             type="text"
@@ -134,7 +134,7 @@ const LoginSignup = () => {
         {action === "Log In" ? (
           <div></div>
         ) : (
-          <div className="input">
+          <div className="ls-input-login">
             <img src={emailIcon} alt="" />
             <input
               type="email"
@@ -146,7 +146,7 @@ const LoginSignup = () => {
           </div>
         )}
         {action === "Log In" ? (
-          <div className="input">
+          <div className="ls-input-login">
             <img src={passwordIcon} alt="" />
             {
               <input
@@ -177,7 +177,7 @@ const LoginSignup = () => {
             )}
           </div>
         ) : (
-          <div className="input">
+          <div className="ls-input-login">
             <img src={passwordIcon} alt="" />
             {
               <input
@@ -210,15 +210,15 @@ const LoginSignup = () => {
           </div>
         )}
         {emailError && action === "Sign Up" && (
-          <p className="error">{emailError}</p>
+          <p className="ls-error">{emailError}</p>
         )}
         {passwordError && action === "Sign Up" && (
-          <p className="error">{passwordError}</p>
+          <p className="ls-error">{passwordError}</p>
         )}
       </div>
-      <div className="submit-container">
+      <div className="ls-submit-container">
         <div
-          className="submit"
+          className="ls-submit"
           onClick={() => {
             action === "Log In" ? handleLogin() : handleRegister();
           }}
@@ -226,7 +226,7 @@ const LoginSignup = () => {
           {action}
         </div>
       </div>
-      <div className="toggle-action">
+      <div className="ls-toggle-action">
         {action === "Log In" ? (
           <p>
             Don't have an account? <span onClick={toggleForm}>Sign Up</span>

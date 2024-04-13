@@ -22,4 +22,15 @@ public class ProductMapper {
         }
         return productDTOs;
     }
+
+    public ProductDTO singleConvertToDTO(Product product) {
+        ProductDTO productDTOs = new ProductDTO();
+
+        productDTOs.setId(product.getId());
+        productDTOs.setTitle(product.getTitle());
+        productDTOs.setPrice(product.getPrice());
+        productDTOs.setProductUrl(product.getProductUrl());
+        productDTOs.setImageUrl(product.getImageUrl());
+        return productDTOs;
+    }
 }
