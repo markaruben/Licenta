@@ -124,7 +124,11 @@ function Product() {
   };
 
   if (!isAuthenticated) {
-    return <div>Please log in to view this page.</div>;
+    return (
+      <div className="loggedout-container">
+        Please log in to view this page.
+      </div>
+    );
   }
 
   if (loading || !product || !userProduct) {
@@ -146,6 +150,7 @@ function Product() {
               type="number"
               value={thresholdPrice}
               onChange={handleThresholdPriceChange}
+              className="threshold-input"
             />{" "}
             Lei
           </p>

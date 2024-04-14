@@ -6,7 +6,7 @@
   border-radius: 5px;
   background-color: #f9f9f9;
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 15%;
 }
 
 .form-group {
@@ -20,8 +20,7 @@ label {
   font-weight: bold;
 }
 
-input[type="text"],
-input[type="number"] {
+.favprod-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -37,11 +36,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #fff;
-  color: #121619;
-}
-
 .logged-out-container {
   max-width: 100%;
   margin: 0 auto;
@@ -50,6 +44,8 @@ button:hover {
   border-radius: 5px;
   background-color: #f9f9f9;
   text-align: center;
+  margin-top: 10%;
+  margin-bottom: 20%;
 }
 
 .logged-out-content {
@@ -63,8 +59,12 @@ button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10%;
 }
 
-.log-in-btn:hover {
-  background-color: #121619;
+@media (max-width: 768px) {
+  .container {
+    margin-top: 20%;
+    margin-bottom: 35%;
+  }
 }

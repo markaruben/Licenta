@@ -8,8 +8,28 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import FavoriteProduct from "./pages/FavoriteProduct";
 import Product from "./pages/Product";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (e.type === "beforeunload") {
+        // Optionally, you can remove the token only if it's set
+        if (localStorage.getItem("jwtToken")) {
+          localStorage.removeItem("jwtToken");
+        }
+        // Prompt the user with a confirmation dialog
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <SnackbarProvider maxSnack={3}>
       <div className="App">

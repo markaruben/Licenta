@@ -92,6 +92,7 @@ function FavoriteProduct() {
               value={productUrl}
               onChange={(e) => setProductUrl(e.target.value)}
               required
+              className="favprod-input"
             />
           </div>
           <div className="form-group">
@@ -102,6 +103,7 @@ function FavoriteProduct() {
               value={thresholdPrice}
               onChange={(e) => setThresholdPrice(e.target.value)}
               required
+              className="favprod-input"
             />
           </div>
           <button type="submit">Submit</button>
