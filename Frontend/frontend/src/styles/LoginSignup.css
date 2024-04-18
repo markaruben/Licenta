@@ -90,10 +90,10 @@
 }
 
 .ls-error {
-  color: #ff5252; /* Error message color */
-  font-size: 90%; /* Adjust font size as needed */
-  margin-top: 5px; /* Add spacing from the input field */
-  width: 85%; /* Limit the width to match the input container */
+  color: #ff5252;
+  font-size: 90%;
+  margin-top: 5px;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;

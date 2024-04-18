@@ -19,7 +19,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -34,17 +33,6 @@ public class ProductController {
 
     @Autowired
     EmailService emailService;
-
-//    @PostMapping("/create")
-//    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
-//        Product createdProduct = productService.createProduct(
-//                productDTO.getName(),
-//                productDTO.getDescription(),
-//                productDTO.getPrice(),
-//                productDTO.getImageUrl()
-//        );
-//        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-//    }
 
     @PostMapping("/callPythonScript")
     public ResponseEntity<String> callPythonScript(@RequestParam String url) {
@@ -108,8 +96,8 @@ public class ProductController {
         double newPrice = Double.parseDouble(requestParams.get("price"));
         Set<UserProduct> userProducts = userProductRepository.findUserProductsByProduct_Id(productId);
         for (UserProduct userProduct : userProducts) {
-            if (newPrice < Double.parseDouble(userProduct.getThresholdPrice())) {
-                notifyUser(userProduct.getUser().getEmail(),userProduct.getProduct().getTitle(),Double.parseDouble(userProduct.getThresholdPrice()), newPrice,userProduct.getProduct().getProductUrl());
+            if (newPrice <= Double.parseDouble(userProduct.getThresholdPrice())) {
+                notifyUser(userProduct.getUser().getEmail(), userProduct.getProduct().getTitle(), Double.parseDouble(userProduct.getThresholdPrice()), newPrice, userProduct.getProduct().getProductUrl());
             }
         }
         return ResponseEntity.ok("Price change notifications sent successfully");
@@ -123,10 +111,8 @@ public class ProductController {
                 + "Product URL: " + productUrl + "\n\n"
                 + "Visit our website to update your preferences.\n\n"
                 + "Thank you for using our service.";
-        emailService.sendMail(userEmail,new String[0],subject, body);
+        emailService.sendMail(userEmail, new String[0], subject, body);
     }
-
-
 
     @PostMapping("/addProduct/{userId}")
     public ResponseEntity<String> addProduct(@PathVariable Integer userId, @RequestBody Map<String, String> requestParams) {
@@ -209,7 +195,6 @@ public class ProductController {
 
     @PutMapping("/{userProductId}/threshold-price")
     public ResponseEntity<String> updateUserProductThresholdPrice(@PathVariable Integer userProductId, @RequestBody String thresholdPrice) {
-        // Parse the thresholdPrice string to extract the numeric value
         Double numericThresholdPrice = Double.parseDouble(thresholdPrice.replaceAll("[^0-9.]", ""));
 
         userProductRepository.updateUserProductThresholdPrice(userProductId, numericThresholdPrice.toString());

@@ -3,13 +3,10 @@ package com.fashionfinds.backendbun.controllers;
 import com.fashionfinds.backendbun.models.ApplicationUser;
 import com.fashionfinds.backendbun.models.LoginResponseDTO;
 import com.fashionfinds.backendbun.models.RegistrationDTO;
-import com.fashionfinds.backendbun.models.Role;
 import com.fashionfinds.backendbun.services.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -37,7 +34,7 @@ public class AuthenticationController {
         if (tokenHeader == null || !tokenHeader.startsWith("Bearer ")) {
             return ResponseEntity.badRequest().body("Invalid JWT Token in request headers");
         }
-        String token = tokenHeader.substring(7); // Remove 'Bearer ' from the token
+        String token = tokenHeader.substring(7);
         String username = authenticationService.getUsernameFromToken(token);
         if (username == null) {
             return ResponseEntity.badRequest().body("Invalid JWT Token");

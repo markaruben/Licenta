@@ -11,8 +11,8 @@
 
 .socialMedia svg {
   color: white;
-  margin: 10px; /* Adjusted margin for smaller screens */
-  font-size: 40px; /* Adjusted font size for smaller screens */
+  margin: 10px;
+  font-size: 40px;
   cursor: pointer;
 }
 
@@ -20,14 +20,13 @@
   color: white;
 }
 
-/* Media Query for smaller screens */
 @media only screen and (max-width: 600px) {
   .footer {
-    height: auto; /* Adjust height for smaller screens */
+    height: auto;
   }
 
   .socialMedia svg {
-    font-size: 30px; /* Further adjusted font size for even smaller screens */
-    margin: 5px; /* Further adjusted margin for even smaller screens */
+    font-size: 30px;
+    margin: 5px;
   }
 }

@@ -1,9 +1,7 @@
 package com.fashionfinds.backendbun.models;
 
 import jakarta.persistence.*;
-import org.apache.catalina.User;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 

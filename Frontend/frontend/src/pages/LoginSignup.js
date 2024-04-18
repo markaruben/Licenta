@@ -134,17 +134,20 @@ const LoginSignup = () => {
         {action === "Log In" ? (
           <div></div>
         ) : (
-          <div className="ls-input-login">
-            <img src={emailIcon} alt="" />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={validateEmail}
-            />
+          <div>
+            <div className="ls-input-login">
+              <img src={emailIcon} alt="" />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={validateEmail}
+              />
+            </div>
           </div>
         )}
+
         {action === "Log In" ? (
           <div className="ls-input-login">
             <img src={passwordIcon} alt="" />

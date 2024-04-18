@@ -7,8 +7,6 @@ public class ProductDTO {
     private String productUrl;
     private String imageUrl;
 
-    // Constructors, getters, setters
-
     public String getTitle() {
         return title;
     }

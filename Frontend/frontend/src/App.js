@@ -14,11 +14,9 @@ function App() {
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (e.type === "beforeunload") {
-        // Optionally, you can remove the token only if it's set
         if (localStorage.getItem("jwtToken")) {
           localStorage.removeItem("jwtToken");
         }
-        // Prompt the user with a confirmation dialog
         e.preventDefault();
         e.returnValue = "";
       }

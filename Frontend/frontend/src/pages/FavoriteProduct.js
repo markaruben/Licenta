@@ -75,8 +75,7 @@ function FavoriteProduct() {
   };
 
   const handleLogin = () => {
-    // Redirect the user to the login page
-    window.location.href = "/login"; // Replace "/login" with your actual login page URL
+    window.location.href = "/login";
   };
 
   return (

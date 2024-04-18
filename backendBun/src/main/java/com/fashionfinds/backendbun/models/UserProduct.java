@@ -2,8 +2,6 @@ package com.fashionfinds.backendbun.models;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
 public class UserProduct {
     @Id

@@ -52,6 +52,7 @@ public class AuthenticationService {
         Set<Role> authorities = new HashSet<>();
 
         authorities.add(userRole);
+
         return userRepository.save(new ApplicationUser(0, body.getUsername(), body.getEmail(), "{bcrypt}" + encodedPassword, authorities));
     }
 
@@ -74,8 +75,9 @@ public class AuthenticationService {
 
     public String getUsernameFromToken(String token) {
         var jwt = jwtDecoder.decode(token);
-        return jwt.getClaimAsString("sub"); // Assuming 'sub' contains the username
+        return jwt.getClaimAsString("sub");
     }
+
     public Optional<ApplicationUser> loadUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }

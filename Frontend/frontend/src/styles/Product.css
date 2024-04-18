@@ -79,7 +79,7 @@
 
 @media (max-width: 768px) {
   .threshold-input {
-    width: 50%; /* Adjusted width for smaller screens */
+    width: 50%;
   }
   .product {
     margin-top: 15%;

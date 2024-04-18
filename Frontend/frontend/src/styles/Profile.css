@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* This ensures padding does not affect total width */
+  box-sizing: border-box;
 }
 
 .profile-page {
@@ -10,49 +10,50 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center; /* Center the containers on the page */
+  align-items: center;
   margin-top: 20px;
 }
 
 .profile-container {
-  width: 50%; /* Adjust width as needed */ /* Assuming you want a white background */
+  width: 50%;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Simple shadow for depth */
-  border-radius: 4px; /* Slight rounding of corners for aesthetics */
-  margin-bottom: 20px; /* Space between profile and favorite products */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
 
 .favorites-container {
-  width: 100%; /* Match width of profile container for alignment */
+  width: 100%;
   padding: 20px;
   margin-bottom: 20px;
-  text-align: center; /* Center text horizontally */
+  text-align: center;
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center children vertically */
-  align-items: center; /* Align children horizontally */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10%;
 }
 .favorites-title {
   margin-bottom: 1.5rem;
-  color: #333; /* Or another color */
-  font-size: 1.5rem; /* Adjust to match your headings */
+  color: #333;
+  font-size: 1.5rem;
 }
 .profile-title {
   margin-bottom: 1.5rem;
-  color: #333; /* Or another color */
-  font-size: 1.5rem; /* Adjust to match your headings */
+  color: #333;
+  font-size: 1.5rem;
 }
 
 .user-detail {
-  color: #555; /* Or your text color */
+  color: #555;
   margin-bottom: 1rem;
   font-size: 1rem;
 }
 
 .login-container {
-  justify-content: center; /* Center children along the main axis */
-  align-items: center; /* Center children along the cross axis */
-  height: 100vh; /* Fill the entire height of the viewport */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   text-align: center;
   padding-top: 200px;
 }
@@ -66,7 +67,7 @@
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
-  color: white; /* Culoarea textului în buton */
+  color: white;
   background-color: #121619;
   border: none;
   border-radius: 5px;
@@ -80,7 +81,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   place-items: center;
-  padding: 0 20px; /* Add padding to avoid edges on small screens */
+  padding: 0 20px;
 }
 
 .productItem {
