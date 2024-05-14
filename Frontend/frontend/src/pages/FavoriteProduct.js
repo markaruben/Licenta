@@ -7,7 +7,7 @@ function FavoriteProduct() {
   const [productUrl, setProductUrl] = useState("");
   const [thresholdPrice, setThresholdPrice] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
     const jwtToken = localStorage.getItem("jwtToken");
@@ -28,8 +28,8 @@ function FavoriteProduct() {
       });
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
-      // Convert userId to an integer
-      setUserId(data.id);
+      setUserId(parseInt(data.id));
+      console.log(userId);
     } catch (error) {
       console.error(
         "There has been a problem with your fetch operation:",
@@ -52,13 +52,15 @@ function FavoriteProduct() {
     };
 
     try {
+      const jwtToken = localStorage.getItem("jwtToken");
       const response = await fetch(
         `http://localhost:8000/products/addProduct/${userId}`,
         {
           method: "POST",
-          headers: {
+          headers: new Headers({
+            Authorization: `Bearer ${jwtToken}`,
             "Content-Type": "application/json",
-          },
+          }),
           body: JSON.stringify(requestBody),
         }
       );

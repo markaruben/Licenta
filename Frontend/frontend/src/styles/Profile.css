@@ -17,8 +17,6 @@
 .profile-container {
   width: 50%;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
   margin-bottom: 20px;
 }
 
@@ -124,6 +122,32 @@
 .productItem p {
   text-align: center;
   margin: 10px;
+}
+
+.logged-out-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 20%;
+}
+
+.logged-out-content {
+  margin-top: 20px;
+}
+
+.log-in-btn {
+  padding: 10px 20px;
+  background-color: #121619;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10%;
 }
 
 @media only screen and (max-width: 1300px) {

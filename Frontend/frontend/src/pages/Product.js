@@ -26,9 +26,10 @@ function Product() {
         const response = await fetch(
           `http://localhost:8000/products/${productId}`,
           {
-            headers: {
+            headers: new Headers({
+              Authorization: `Bearer ${jwtToken}`,
               "Content-Type": "application/json",
-            },
+            }),
           }
         );
 
@@ -48,9 +49,10 @@ function Product() {
         const response = await fetch(
           `http://localhost:8000/products/getUserProduct/${userId}/${productId}`,
           {
-            headers: {
+            headers: new Headers({
+              Authorization: `Bearer ${jwtToken}`,
               "Content-Type": "application/json",
-            },
+            }),
           }
         );
 

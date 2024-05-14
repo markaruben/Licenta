@@ -70,6 +70,7 @@ public class ProductService {
     public Integer getProductIdByProductUrl(String productUrl) {
         String truncatedUrl = truncateUrl(productUrl);
         Product product = productRepository.findByProductUrl(truncatedUrl);
+        System.out.println();
         return product != null ? product.getId() : null;
     }
 

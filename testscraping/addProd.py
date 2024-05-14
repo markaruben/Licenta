@@ -111,11 +111,15 @@ def add_to_database(products):
         for product in products:
             title, price, url, image_url = product
             price = format_price(price)
+            
+            # Shorten product_url to 255 characters
+            url = url[:255]
+            
             cursor.execute("UPDATE products_seq SET next_val = %s", (next_id,))
             cursor.execute("SELECT * FROM products WHERE title = %s", (title,))
             existing_product = cursor.fetchone()
             if existing_product:
-                cursor.execute("UPDATE products SET price = %s, image_url = %s WHERE title = %s", (price, image_url, title))
+                cursor.execute("UPDATE products SET price = %s, image_url = %s, product_url = %s WHERE title = %s", (price, image_url, url, title))
             else:
                 cursor.execute("INSERT INTO products (id, title, price, product_url, image_url) VALUES (%s, %s, %s, %s, %s)", (next_id, title, price, url, image_url))
             next_id += 1
@@ -124,6 +128,7 @@ def add_to_database(products):
         print("Error:", err)
     finally:
         connection.close()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

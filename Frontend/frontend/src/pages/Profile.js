@@ -9,6 +9,10 @@ function Profile() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const navigate = useNavigate();
 
+  const handleLogin = () => {
+    window.location.href = "/login";
+  };
+
   useEffect(() => {
     const jwtToken = localStorage.getItem("jwtToken");
     if (!jwtToken) {
@@ -102,11 +106,13 @@ function Profile() {
 
   if (!isAuthenticated) {
     return (
-      <div className="login-container">
-        <p className="login-message">Please log in!</p>
-        <button className="logButton" onClick={() => navigate("/login")}>
-          Log In
-        </button>
+      <div className="logged-out-container">
+        <div className="logged-out-content">
+          <p>Please log in to see your profile.</p>
+          <button className="log-in-btn" onClick={handleLogin}>
+            Log In
+          </button>
+        </div>
       </div>
     );
   }
@@ -114,12 +120,11 @@ function Profile() {
   return (
     <div className="profile-page">
       <div className="profile-container">
-        <h2 className="profile-title">User Details</h2>
-        <p className="user-detail">Name: {userDetails.username}</p>
-        <p className="user-detail">Email: {userDetails.email}</p>
+        <h2 className="profile-title">
+          {userDetails.username}'s Favorite Products
+        </h2>
       </div>
       <div className="favorites-container">
-        <h3>Favorite Products</h3>
         <div className="product-list">
           {favoriteProducts && favoriteProducts.length > 0 ? (
             favoriteProducts.map((product, index) => (

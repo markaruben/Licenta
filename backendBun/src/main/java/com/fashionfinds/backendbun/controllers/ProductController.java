@@ -147,6 +147,7 @@ public class ProductController {
                 }
             } else {
                 Integer productId = productService.getProductIdByProductUrl(productUrl);
+                System.out.println(productId);
                 if (userProductRepository.existsByUser_userIdAndProduct_id(userId, productId)) {
                     return ResponseEntity.status(HttpStatus.CONFLICT).body("User has already favorited this product!");
                 }
