@@ -29,6 +29,9 @@ public class Product {
     private String price;
     private String productUrl;
 
+    @OneToMany(mappedBy = "product")
+    private Set<PriceHistory> priceHistories;
+
     private String imageUrl;
 
     public String getImageUrl() {
@@ -81,5 +84,13 @@ public class Product {
 
     public void setUserProducts(Set<UserProduct> userProducts) {
         this.userProducts = userProducts;
+    }
+
+    public Set<PriceHistory> getPriceHistories() {
+        return priceHistories;
+    }
+
+    public void setPriceHistories(Set<PriceHistory> priceHistories) {
+        this.priceHistories = priceHistories;
     }
 }

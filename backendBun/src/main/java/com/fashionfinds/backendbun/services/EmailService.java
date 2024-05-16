@@ -13,6 +13,9 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
+    @Value("${mail.fromName}")
+    private String fromName;
+
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -21,9 +24,11 @@ public class EmailService {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
-            mimeMessageHelper.setFrom(fromEmail);
+            mimeMessageHelper.setFrom(String.format("%s <%s>", fromName, fromEmail));
             mimeMessageHelper.setTo(to);
-            mimeMessageHelper.setCc(cc);
+            if (cc != null) {
+                mimeMessageHelper.setCc(cc);
+            }
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(body);
 
@@ -34,5 +39,4 @@ public class EmailService {
             throw new RuntimeException(e);
         }
     }
-
 }

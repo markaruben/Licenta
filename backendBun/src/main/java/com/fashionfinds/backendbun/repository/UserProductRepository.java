@@ -30,4 +30,6 @@ public interface UserProductRepository extends JpaRepository<UserProduct, Intege
     @Modifying
     @Query("UPDATE UserProduct up SET up.thresholdPrice = :thresholdPrice WHERE up.id = :userProductId")
     void updateUserProductThresholdPrice(@Param("userProductId") Integer userProductId, @Param("thresholdPrice") String thresholdPrice);
+    @Transactional
+    void deleteByProductId(Integer productId);
 }

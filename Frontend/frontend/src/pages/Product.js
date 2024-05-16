@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../styles/Product.css";
 import { useSnackbar } from "notistack";
-import { success, error, info } from "../helpers/alerts.ts";
+import { success, error } from "../helpers/alerts.ts";
+import { Line } from "react-chartjs-2";
+import "chart.js/auto"; // Import all chart.js modules
+import "chartjs-adapter-date-fns"; // Import date-fns adapter
 
 function Product() {
   const { enqueueSnackbar } = useSnackbar();
@@ -11,6 +14,7 @@ function Product() {
   const [userProduct, setUserProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [thresholdPrice, setThresholdPrice] = useState(0);
+  const [priceHistory, setPriceHistory] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -69,6 +73,35 @@ function Product() {
       }
     };
 
+    const fetchPriceHistory = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/productHistory/${productId}/price-history`,
+          {
+            headers: new Headers({
+              Authorization: `Bearer ${jwtToken}`,
+              "Content-Type": "application/json",
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch price history");
+        }
+
+        const data = await response.json();
+
+        const processedData = data.map((entry) => ({
+          date: new Date(entry.date),
+          price: parseFloat(entry.price),
+        }));
+
+        setPriceHistory(processedData);
+      } catch (error) {
+        console.error("Error fetching price history:", error);
+      }
+    };
+
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
@@ -90,6 +123,7 @@ function Product() {
     };
 
     fetchProduct();
+    fetchPriceHistory();
     fetchUserDetails().then((userId) => {
       if (userId) {
         fetchUserProduct(userId);
@@ -137,6 +171,35 @@ function Product() {
     return <div className="loading">Loading...</div>;
   }
 
+  const data = {
+    labels: priceHistory.map((entry) => entry.date),
+    datasets: [
+      {
+        label: "Price History",
+        data: priceHistory.map((entry) => ({
+          x: entry.date,
+          y: entry.price,
+        })),
+        borderColor: "rgba(75, 192, 192, 1)",
+        fill: false,
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      x: {
+        type: "time",
+        time: {
+          unit: "day",
+        },
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
   return (
     <div className="product">
       <h2 className="product-title">{product.title}</h2>
@@ -159,6 +222,11 @@ function Product() {
           <button className="product-button" onClick={updateThresholdPrice}>
             Update Threshold Price
           </button>
+        </div>
+      </div>
+      <div className="product-history">
+        <div className="chart-container">
+          <Line data={data} options={options} />
         </div>
       </div>
     </div>

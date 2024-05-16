@@ -4,6 +4,7 @@ import com.fashionfinds.backendbun.models.Product;
 import com.fashionfinds.backendbun.models.ProductDTO;
 import com.fashionfinds.backendbun.models.UserProduct;
 import com.fashionfinds.backendbun.models.UserProductDTO;
+import com.fashionfinds.backendbun.repository.PriceHistoryRepository;
 import com.fashionfinds.backendbun.repository.UserProductRepository;
 import com.fashionfinds.backendbun.services.EmailService;
 import com.fashionfinds.backendbun.services.ProductService;
@@ -32,7 +33,41 @@ public class ProductController {
     private UserProductRepository userProductRepository;
 
     @Autowired
+    private PriceHistoryRepository priceHistoryRepository;
+
+    @Autowired
     EmailService emailService;
+
+    @DeleteMapping("/deleteProductAndNotifyUsers/{productId}")
+    public ResponseEntity<String> deleteProductAndNotifyUsers(@PathVariable Integer productId) {
+        try {
+            Set<UserProduct> userProducts = userProductRepository.findUserProductsByProduct_Id(productId);
+
+            // Notify users about product removal
+            for (UserProduct userProduct : userProducts) {
+                notifyUserProductRemoval(userProduct.getUser().getEmail(), userProduct.getProduct().getTitle(), userProduct.getProduct().getProductUrl());
+            }
+
+            userProductRepository.deleteByProductId(productId);
+
+            priceHistoryRepository.deleteByProductId(productId);
+
+            productService.deleteProduct(productId);
+
+            return ResponseEntity.ok("Product and related data deleted successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting product and related data: " + e.getMessage());
+        }
+    }
+
+    private void notifyUserProductRemoval(String userEmail, String productTitle, String productUrl) {
+        String subject = "Product Removal Notification";
+        String body = "Hello!\n\nWe regret to inform you that the product '" + productTitle + "' is no longer available and has been removed from our service.\n\n"
+                + "Product URL: " + productUrl + "\n\n"
+                + "Thank you for using our service.";
+        emailService.sendMail(userEmail, new String[0], subject, body);
+    }
 
     @PostMapping("/callPythonScript")
     public ResponseEntity<String> callPythonScript(@RequestParam String url) {

@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import schedule
 import time
+import requests
 
 def extract_price(price_string, pattern):
     match = re.search(pattern, price_string)
@@ -34,6 +35,13 @@ def update_product_price(product_id, new_price):
         cursor = connection.cursor()
 
         cursor.execute("UPDATE products SET price = %s WHERE id = %s", (new_price, product_id))
+
+        # Get next value for price_history id
+        cursor.execute("SELECT next_val FROM price_history_seq")
+        next_price_history_id = cursor.fetchone()[0]
+        cursor.execute("UPDATE price_history_seq SET next_val = %s", (next_price_history_id + 1,))
+
+        cursor.execute("INSERT INTO price_history (id, product_id, price, date) VALUES (%s, %s, %s, NOW())", (next_price_history_id, product_id, new_price))
         connection.commit()
 
         # Call backend endpoint to notify about price change
@@ -45,7 +53,14 @@ def update_product_price(product_id, new_price):
         if 'connection' in locals():
             connection.close()
 
-import requests
+def delete_product(product_id):
+    backend_url = f'http://localhost:8000/products/{product_id}'
+    try:
+        response = requests.delete(backend_url)
+        response.raise_for_status()
+        print(f"Product ID {product_id} deleted successfully")
+    except requests.RequestException as e:
+        print(f"Error deleting product ID {product_id}:", e)
 
 def notify_backend_price_change(product_id, new_price):
     backend_url = 'http://localhost:8000/products/notifyPriceChange'
@@ -95,7 +110,6 @@ def scrape_price_from_url_amazonshop(url):
     finally:
         driver.quit()
 
-
 def update_prices_from_database():
     try:
         connection = mysql.connector.connect(
@@ -131,14 +145,14 @@ def update_prices_from_database():
                     print("Price format not recognized for product ID:", product_id)
             else:
                 print("Failed to scrape price for product ID:", product_id)
+                delete_product(product_id)
     except mysql.connector.Error as err:
         print("Error:", err)
     finally:
         if 'connection' in locals():
             connection.close()
 
-
-schedule.every(1).minutes.do(update_prices_from_database)
+schedule.every(5).minutes.do(update_prices_from_database)
 
 while True:
     schedule.run_pending()

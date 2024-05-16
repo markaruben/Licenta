@@ -34,10 +34,6 @@ public class ProductService {
         UserProduct userProduct = userProductService.findUserProductById(userProductId);
 
         userProductService.deleteUserProduct(userProductId);
-        Set<UserProduct> userProductsByProdId = userProductService.findUserProductsByProductId(userProduct.getProduct().getId());
-        if (userProductsByProdId.isEmpty()) {
-            productRepository.delete(userProduct.getProduct());
-        }
     }
 
     @Transactional
