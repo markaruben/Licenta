@@ -82,11 +82,12 @@ function FavoriteProduct() {
 
   return (
     <div className={isLoggedIn ? "container" : "logged-out-container"}>
-      <h2>Add Favorite Product</h2>
       {isLoggedIn ? (
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="productUrl">Product URL:</label>
+            <h2 className="title">Add your favorite product </h2>
+
+            <label htmlFor="productUrl">Enter the URL for your product:</label>
             <input
               type="text"
               id="productUrl"
