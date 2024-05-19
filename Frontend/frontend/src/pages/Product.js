@@ -175,7 +175,7 @@ function Product() {
     labels: priceHistory.map((entry) => entry.date),
     datasets: [
       {
-        label: "Price History",
+        label: "Price",
         data: priceHistory.map((entry) => ({
           x: entry.date,
           y: entry.price,
@@ -224,10 +224,9 @@ function Product() {
           </button>
         </div>
       </div>
-      <div className="product-history">
-        <div className="chart-container">
-          <Line data={data} options={options} />
-        </div>
+
+      <div className="chart-container">
+        <Line data={data} options={options} />
       </div>
     </div>
   );

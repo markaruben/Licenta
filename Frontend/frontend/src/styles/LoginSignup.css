@@ -4,7 +4,7 @@
   margin: auto;
   margin-top: 1%;
   width: 35%;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.5);
   padding-bottom: 5%;
   margin-bottom: 1%;
 }
@@ -19,7 +19,7 @@
 }
 
 .ls-text {
-  color: #121619;
+  color: white;
   font-size: 250%;
   font-weight: 700;
 }
@@ -27,7 +27,7 @@
 .ls-underline {
   width: 15%;
   height: 6px;
-  background: #121619;
+  background: white;
   border-radius: 9px;
 }
 
@@ -64,18 +64,6 @@
 .ls-input-login input[type="text"],
 .ls-input-login input[type="number"] {
   border: none;
-}
-
-.ls-forgot-password {
-  padding-left: 10%;
-  margin-top: 5%;
-  color: #797979;
-  font-size: 100%;
-}
-
-.ls-forgot-password span {
-  color: #121619;
-  cursor: pointer;
 }
 
 .ls-input-login span {
@@ -158,7 +146,7 @@
   display: flex;
   justify-content: center;
   font-size: 100%;
-  color: #797979;
+  color: #d3d3d3;
   margin-bottom: 10%;
 }
 
@@ -167,7 +155,7 @@
 }
 
 .ls-toggle-action span {
-  color: #121619;
+  color: White;
   font-weight: 700;
   cursor: pointer;
   margin-left: 5px;

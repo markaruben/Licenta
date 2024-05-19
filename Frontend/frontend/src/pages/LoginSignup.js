@@ -166,7 +166,7 @@ const LoginSignup = () => {
                   toggleShowPassword();
                 }}
               >
-                <VisibilityOffIcon />
+                <VisibilityOffIcon color="action" />
               </span>
             ) : (
               <span
@@ -175,7 +175,7 @@ const LoginSignup = () => {
                   toggleShowPassword();
                 }}
               >
-                <VisibilityIcon />
+                <VisibilityIcon color="action" />
               </span>
             )}
           </div>
@@ -198,7 +198,7 @@ const LoginSignup = () => {
                   toggleShowPassword();
                 }}
               >
-                <VisibilityOffIcon />
+                <VisibilityOffIcon color="action" />
               </span>
             ) : (
               <span
@@ -207,7 +207,7 @@ const LoginSignup = () => {
                   toggleShowPassword();
                 }}
               >
-                <VisibilityIcon />
+                <VisibilityIcon color="action" />
               </span>
             )}
           </div>
