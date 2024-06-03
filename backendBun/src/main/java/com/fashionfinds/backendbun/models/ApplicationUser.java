@@ -13,7 +13,6 @@ import java.util.Set;
 @Table(name = "users")
 
 public class ApplicationUser implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
