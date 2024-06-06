@@ -19,13 +19,16 @@ function FavoriteProduct() {
 
   const fetchUserDetails = async (jwtToken) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/user-details", {
-        method: "GET",
-        headers: new Headers({
-          Authorization: `Bearer ${jwtToken}`,
-          "Content-Type": "application/json",
-        }),
-      });
+      const response = await fetch(
+        "http://192.168.1.130:8000/auth/user-details",
+        {
+          method: "GET",
+          headers: new Headers({
+            Authorization: `Bearer ${jwtToken}`,
+            "Content-Type": "application/json",
+          }),
+        }
+      );
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
       setUserId(parseInt(data.id));
@@ -54,7 +57,7 @@ function FavoriteProduct() {
     try {
       const jwtToken = localStorage.getItem("jwtToken");
       const response = await fetch(
-        `http://localhost:8000/products/addProduct/${userId}`,
+        `http://192.168.1.130:8000/products/addProduct/${userId}`,
         {
           method: "POST",
           headers: new Headers({
@@ -81,43 +84,47 @@ function FavoriteProduct() {
   };
 
   return (
-    <div className={isLoggedIn ? "container" : "logged-out-container"}>
-      {isLoggedIn ? (
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <h2 className="title">Add your favorite product </h2>
+    <div className="main-content">
+      <div className={isLoggedIn ? "container" : "logged-out-container"}>
+        {isLoggedIn ? (
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <h2 className="title">Add your favorite product </h2>
 
-            <label htmlFor="productUrl">Enter the URL for your product:</label>
-            <input
-              type="text"
-              id="productUrl"
-              value={productUrl}
-              onChange={(e) => setProductUrl(e.target.value)}
-              required
-              className="favprod-input"
-            />
+              <label htmlFor="productUrl">
+                Enter the URL for your product:
+              </label>
+              <input
+                type="text"
+                id="productUrl"
+                value={productUrl}
+                onChange={(e) => setProductUrl(e.target.value)}
+                required
+                className="favprod-input"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="thresholdPrice">Threshold Price:</label>
+              <input
+                type="number"
+                id="thresholdPrice"
+                value={thresholdPrice}
+                onChange={(e) => setThresholdPrice(e.target.value)}
+                required
+                className="favprod-input"
+              />
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        ) : (
+          <div className="logged-out-content">
+            <p>Please log in to add a favorite product.</p>
+            <button className="log-in-btn" onClick={handleLogin}>
+              Log In
+            </button>
           </div>
-          <div className="form-group">
-            <label htmlFor="thresholdPrice">Threshold Price:</label>
-            <input
-              type="number"
-              id="thresholdPrice"
-              value={thresholdPrice}
-              onChange={(e) => setThresholdPrice(e.target.value)}
-              required
-              className="favprod-input"
-            />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      ) : (
-        <div className="logged-out-content">
-          <p>Please log in to add a favorite product.</p>
-          <button className="log-in-btn" onClick={handleLogin}>
-            Log In
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

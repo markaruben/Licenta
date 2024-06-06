@@ -4,8 +4,8 @@ import "../styles/Product.css";
 import { useSnackbar } from "notistack";
 import { success, error } from "../helpers/alerts.ts";
 import { Line } from "react-chartjs-2";
-import "chart.js/auto"; // Import all chart.js modules
-import "chartjs-adapter-date-fns"; // Import date-fns adapter
+import "chart.js/auto";
+import "chartjs-adapter-date-fns";
 
 function Product() {
   const { enqueueSnackbar } = useSnackbar();
@@ -28,7 +28,7 @@ function Product() {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/products/${productId}`,
+          `http://192.168.1.130:8000/products/${productId}`,
           {
             headers: new Headers({
               Authorization: `Bearer ${jwtToken}`,
@@ -51,7 +51,7 @@ function Product() {
     const fetchUserProduct = async (userId) => {
       try {
         const response = await fetch(
-          `http://localhost:8000/products/getUserProduct/${userId}/${productId}`,
+          `http://192.168.1.130:8000/products/getUserProduct/${userId}/${productId}`,
           {
             headers: new Headers({
               Authorization: `Bearer ${jwtToken}`,
@@ -76,7 +76,7 @@ function Product() {
     const fetchPriceHistory = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/productHistory/${productId}/price-history`,
+          `http://192.168.1.130:8000/productHistory/${productId}/price-history`,
           {
             headers: new Headers({
               Authorization: `Bearer ${jwtToken}`,
@@ -105,7 +105,7 @@ function Product() {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/auth/user-details",
+          "http://192.168.1.130:8000/auth/user-details",
           {
             method: "GET",
             headers: new Headers({
@@ -139,7 +139,7 @@ function Product() {
     try {
       const jwtToken = localStorage.getItem("jwtToken");
       const response = await fetch(
-        `http://localhost:8000/products/${userProduct.id}/threshold-price`,
+        `http://192.168.1.130:8000/products/${userProduct.id}/threshold-price`,
         {
           method: "PUT",
           headers: {
@@ -223,10 +223,9 @@ function Product() {
             Update Threshold Price
           </button>
         </div>
-      </div>
-
-      <div className="chart-container">
-        <Line data={data} options={options} />
+        <div className="chart-container">
+          <Line data={data} options={options} />
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,32 @@
-.container {
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container,
+.logged-out-container {
   width: 50%;
-  margin: 0 auto;
   padding: 20px;
   background-color: transparent;
   margin-top: 5%;
   margin-bottom: 15%;
+  text-align: center;
 }
 
 h2 {
@@ -55,35 +77,10 @@ button {
   cursor: pointer;
   align-self: center;
 }
+
 .title {
   text-align: center;
   color: whitesmoke;
-}
-
-body {
-  background-image: url("https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  margin: 0;
-  color: white;
-}
-
-.container,
-.logged-out-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-form {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
 }
 
 .logged-out-content {
@@ -108,7 +105,6 @@ form {
   background-color: #f9f9f9;
   color: #121619;
   border: none;
-  text-wrap: pretty;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
@@ -117,7 +113,76 @@ form {
 
 @media (max-width: 768px) {
   .container {
+    width: 80%;
+    margin-top: 10%;
+    margin-bottom: 20%;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+  .favprod-input {
+    padding: 8px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .log-in-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    margin-top: 15%;
+    margin-bottom: 25%;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .favprod-input {
+    padding: 6px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .log-in-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .logged-out-container {
+    width: 90%;
     margin-top: 20%;
-    margin-bottom: 35%;
+    margin-bottom: 55%;
   }
 }

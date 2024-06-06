@@ -24,7 +24,7 @@ function Profile() {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/auth/user-details",
+          "http://192.168.1.130:8000/auth/user-details",
           {
             method: "GET",
             headers: new Headers({
@@ -48,7 +48,7 @@ function Profile() {
     const fetchFavoriteProducts = async (userId) => {
       try {
         const response = await fetch(
-          `http://localhost:8000/products/user/${userId}/favorite-products`,
+          `http://192.168.1.130:8000/products/user/${userId}/favorite-products`,
           {
             method: "GET",
             headers: new Headers({
@@ -83,7 +83,7 @@ function Profile() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/products/removeFavorite/${userDetails.id}/${productId}`,
+        `http://192.168.1.130:8000/products/removeFavorite/${userDetails.id}/${productId}`,
         {
           method: "DELETE",
           headers: new Headers({

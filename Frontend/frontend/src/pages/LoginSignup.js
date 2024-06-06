@@ -42,7 +42,7 @@ const LoginSignup = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch("http://192.168.1.130:8000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const LoginSignup = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:8000/auth/register", {
+      const response = await fetch("http://192.168.1.130:8000/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
