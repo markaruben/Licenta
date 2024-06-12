@@ -112,7 +112,6 @@ def add_to_database(products):
             title, price, url, image_url = product
             price = format_price(price)
             
-            # Shorten product_url to 255 characters
             url = url[:255]
             
             cursor.execute("UPDATE products_seq SET next_val = %s", (next_product_id,))
@@ -126,7 +125,6 @@ def add_to_database(products):
                 product_id = next_product_id
                 next_product_id += 1
 
-            # Get next value for price_history id
             cursor.execute("SELECT next_val FROM price_history_seq")
             next_price_history_id = cursor.fetchone()[0]
             cursor.execute("UPDATE price_history_seq SET next_val = %s", (next_price_history_id + 1,))
