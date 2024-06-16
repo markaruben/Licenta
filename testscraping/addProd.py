@@ -102,18 +102,14 @@ def add_to_database(products):
         database="dblic"
     )
     cursor = connection.cursor()
-
     try:
         cursor.execute("SELECT next_val FROM products_seq")
         next_product_id = cursor.fetchone()[0]
         next_product_id += 1
-
         for product in products:
             title, price, url, image_url = product
             price = format_price(price)
-            
             url = url[:255]
-            
             cursor.execute("UPDATE products_seq SET next_val = %s", (next_product_id,))
             cursor.execute("SELECT * FROM products WHERE title = %s", (title,))
             existing_product = cursor.fetchone()
@@ -124,13 +120,10 @@ def add_to_database(products):
                 cursor.execute("INSERT INTO products (id, title, price, product_url, image_url) VALUES (%s, %s, %s, %s, %s)", (next_product_id, title, price, url, image_url))
                 product_id = next_product_id
                 next_product_id += 1
-
             cursor.execute("SELECT next_val FROM price_history_seq")
             next_price_history_id = cursor.fetchone()[0]
             cursor.execute("UPDATE price_history_seq SET next_val = %s", (next_price_history_id + 1,))
-
             cursor.execute("INSERT INTO price_history (id, product_id, price, date) VALUES (%s, %s, %s, NOW())", (next_price_history_id, product_id, price))
-
         connection.commit()
     except mysql.connector.Error as err:
         print("Error:", err)
@@ -141,10 +134,8 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python script.py <url>")
         sys.exit(1)
-
     product_url = sys.argv[1]
     parsed_url = urlparse(product_url)
-
     if parsed_url.netloc == 'www.emag.ro':
         product_price, product_title, product_url, image_url = get_product_info(product_url)
     elif parsed_url.netloc == 'amazonshop.ro':
@@ -152,6 +143,5 @@ if __name__ == "__main__":
     else:
         print("Unsupported website")
         sys.exit(1)
-
     products = [(product_title, product_price, product_url, image_url)]
     add_to_database(products)

@@ -20,7 +20,7 @@ function FavoriteProduct() {
   const fetchUserDetails = async (jwtToken) => {
     try {
       const response = await fetch(
-        "http://192.168.1.130:8000/auth/user-details",
+        "http://192.168.0.119:8000/auth/user-details",
         {
           method: "GET",
           headers: new Headers({
@@ -41,11 +41,29 @@ function FavoriteProduct() {
     }
   };
 
+  const isValidUrl = (url) => {
+    const allowedDomains = ["emag.ro", "amazonshop.ro"];
+    try {
+      const { hostname } = new URL(url);
+      return allowedDomains.some((domain) => hostname.includes(domain));
+    } catch (e) {
+      return false;
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!userId) {
       console.error("User ID not available");
+      return;
+    }
+
+    if (!isValidUrl(productUrl)) {
+      info(
+        enqueueSnackbar,
+        "Only URLs from emag.ro or amazonshop.ro are allowed."
+      );
       return;
     }
 
@@ -57,7 +75,7 @@ function FavoriteProduct() {
     try {
       const jwtToken = localStorage.getItem("jwtToken");
       const response = await fetch(
-        `http://192.168.1.130:8000/products/addProduct/${userId}`,
+        `http://192.168.0.119:8000/products/addProduct/${userId}`,
         {
           method: "POST",
           headers: new Headers({
