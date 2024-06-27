@@ -108,7 +108,9 @@ function FavoriteProduct() {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <h2 className="title">Add your favorite product </h2>
-
+              <p className="warning">
+                Please only insert URLs from eMAG or AmazonShop
+              </p>
               <label htmlFor="productUrl">
                 Enter the URL for your product:
               </label>

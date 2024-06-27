@@ -152,7 +152,7 @@ def update_prices_from_database():
         if 'connection' in locals():
             connection.close()
 
-schedule.every(5).minutes.do(update_prices_from_database)
+schedule.every(1).minutes.do(update_prices_from_database)
 
 while True:
     schedule.run_pending()

@@ -111,6 +111,11 @@ button {
   margin-top: 10%;
 }
 
+.warning {
+  padding-bottom: 3%;
+  color: yellow;
+}
+
 @media (max-width: 768px) {
   .container {
     width: 80%;
