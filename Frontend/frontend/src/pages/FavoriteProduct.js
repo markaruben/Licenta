@@ -19,16 +19,13 @@ function FavoriteProduct() {
 
   const fetchUserDetails = async (jwtToken) => {
     try {
-      const response = await fetch(
-        "http://192.168.0.119:8000/auth/user-details",
-        {
-          method: "GET",
-          headers: new Headers({
-            Authorization: `Bearer ${jwtToken}`,
-            "Content-Type": "application/json",
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:8000/auth/user-details", {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${jwtToken}`,
+          "Content-Type": "application/json",
+        }),
+      });
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
       setUserId(parseInt(data.id));
@@ -75,7 +72,7 @@ function FavoriteProduct() {
     try {
       const jwtToken = localStorage.getItem("jwtToken");
       const response = await fetch(
-        `http://192.168.0.119:8000/products/addProduct/${userId}`,
+        `http://localhost:8000/products/addProduct/${userId}`,
         {
           method: "POST",
           headers: new Headers({
