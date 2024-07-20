@@ -35,16 +35,12 @@ def update_product_price(product_id, new_price):
         cursor = connection.cursor()
 
         cursor.execute("UPDATE products SET price = %s WHERE id = %s", (new_price, product_id))
-
-        # Get next value for price_history id
         cursor.execute("SELECT next_val FROM price_history_seq")
         next_price_history_id = cursor.fetchone()[0]
         cursor.execute("UPDATE price_history_seq SET next_val = %s", (next_price_history_id + 1,))
 
         cursor.execute("INSERT INTO price_history (id, product_id, price, date) VALUES (%s, %s, %s, NOW())", (next_price_history_id, product_id, new_price))
         connection.commit()
-
-        # Call backend endpoint to notify about price change
         notify_backend_price_change(product_id, new_price)
 
     except mysql.connector.Error as err:
@@ -152,7 +148,7 @@ def update_prices_from_database():
         if 'connection' in locals():
             connection.close()
 
-schedule.every(1).minutes.do(update_prices_from_database)
+schedule.every(30).seconds.do(update_prices_from_database)
 
 while True:
     schedule.run_pending()

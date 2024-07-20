@@ -71,6 +71,7 @@ function FavoriteProduct() {
 
     try {
       const jwtToken = localStorage.getItem("jwtToken");
+      console.log(userId);
       const response = await fetch(
         `http://localhost:8000/products/addProduct/${userId}`,
         {

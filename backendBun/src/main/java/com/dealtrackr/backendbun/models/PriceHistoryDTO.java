@@ -6,7 +6,6 @@ public class PriceHistoryDTO {
     private LocalDateTime date;
     private String price;
 
-    // Constructori, getteri și setteri
 
     public PriceHistoryDTO(LocalDateTime date, String price) {
         this.date = date;
